@@ -5,7 +5,7 @@ using Poker.Enums;
 
 namespace Poker.Models
 {
-    public class Card
+    public class Card: IComparable<Card>
     {
         private CardSuit _cardSuit;
         private int _cardValue;
@@ -73,6 +73,12 @@ namespace Poker.Models
         private bool CardValueIsValid() => _cardValue > 0 && _cardValue < 14;
 
         public bool IsValid() => CardValueIsValid();
- 
+
+        public int CompareTo(Card other)
+        {
+            if (other == null)
+                return 1;
+            return _cardValue.CompareTo(other.CardValue);
+        }
     }
 }

@@ -48,7 +48,7 @@ namespace Poker
                 throw new Exception($"Hand must contain 5 cards, hand currently contains {hand.cards.Count} cards.");
         }
 
-        public void FindBiggestHand()
+        public void FindWinningHand()
         {
 
         }
