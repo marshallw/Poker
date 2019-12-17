@@ -40,6 +40,14 @@ namespace Poker
             _hands = new List<Hand>();
         }
 
+        public void AddHand(Hand hand)
+        {
+            if (hand.cards.Count == 5)
+                _hands.Add(hand);
+            else
+                throw new Exception($"Hand must contain 5 cards, hand currently contains {hand.cards.Count} cards.");
+        }
+
         public void FindBiggestHand()
         {
 
