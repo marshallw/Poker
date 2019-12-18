@@ -8,6 +8,7 @@ namespace Poker.HandEvaluators
 {
     interface IHandEvaluator
     {
-        bool IsHandThis(Hand hand);
+         bool IsHandThis(Hand hand);
+        HandValue GetHandValue(Hand hand);
     }
 }
