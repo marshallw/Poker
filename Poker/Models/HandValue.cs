@@ -1,21 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Globalization;
 
 namespace Poker.Models
 {
     public class HandValue: IComparable<HandValue>
     {
-        private string _handTypeValue;
-        private string _highCardValue;
-
-        public string HandTypeValue => _handTypeValue;
-        public string HighCardValue => _highCardValue;
-        
+        private byte _handRank;
+        public byte HandRank => _handRank;
         public HandValue(string handTypeValue, string highCardValue)
         {
-            _handTypeValue = handTypeValue;
-            _highCardValue = highCardValue;
+            _handRank = (byte)(Byte.Parse(handTypeValue, NumberStyles.HexNumber) << 4);
+            _handRank = (byte)(_handRank | Byte.Parse(highCardValue, NumberStyles.HexNumber));
         }
 
         public int CompareTo(HandValue other)
@@ -23,10 +20,10 @@ namespace Poker.Models
             if (other == null)
                 return 1;
 
-            int result = _handTypeValue.CompareTo(other.HandTypeValue);
+            int result = _handRank.CompareTo(other.HandRank);
             if (result == 0)
             {
-                result = _highCardValue.CompareTo(other.HighCardValue);
+                result = _handRank.CompareTo(other.HandRank);
             }
 
             return result;
