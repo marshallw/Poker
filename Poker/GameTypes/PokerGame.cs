@@ -17,7 +17,17 @@ namespace Poker.GameTypes
 
         public Hand FindWinningHand()
         {
-            _hands.Where(hand => HandEvaluator.FindHandType(hand.cards) > _hands.FirstOrDefault(hand2 => hand != hand2 && HandEvaluators.FindHandType(hand2.cards))
+            IHand highest;
+            foreach (var hand in _hands)
+            {
+                IHand evaluator = HandRanker.RankHand(hand);
+                if (evaluator > highest)
+                {
+                    highest = evaluator;
+                }
+            }
+
+            return highest;
         }
     }
 }
