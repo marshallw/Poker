@@ -8,21 +8,24 @@ namespace Poker.GameTypes
 {
     public abstract class AbstractGameType
     {
-        private List<Hand> _hands;
-        private int _maxHandSize = 5;
+        protected List<Hand> _hands;
+        protected int _maxHandSize = 5;
 
         public int MaxHandSize => _maxHandSize;
 
-        public void AddHand(Hand hand)
+        public void AddHand(params Hand[] hands)
         {
-            if (hand.cards.Count != _maxHandSize)
+            foreach (var hand in hands)
             {
-                throw new HandWrongSizeException($"Hand is wrong size.  Expected: {_maxHandSize}.  Actual: {hand.cards.Count}");
-            }
+                if (hand.cards.Count != _maxHandSize)
+                {
+                    throw new HandWrongSizeException($"Hand is wrong size.  Expected: {_maxHandSize}.  Actual: {hand.cards.Count}");
+                }
 
-            _hands.Add(hand);
+                _hands.Add(hand);
+            }
         }
 
-        public abstract Hand FindWinningHand();
+        public abstract HandDetails FindWinningHand();
     }
 }

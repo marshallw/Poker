@@ -9,6 +9,6 @@ namespace Poker.HandEvaluators
     public interface IHandEvaluator
     {
          bool IsHandThis(Hand hand);
-        HandValue GetHandValue(Hand hand);
+        HandDetails GetHandValue(Hand hand);
     }
 }

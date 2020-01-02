@@ -23,10 +23,10 @@ namespace Poker
             _deck = new Deck();
             for (int i = 1; i < 14; i++)
             {
-                _deck.Push(new Card(CardSuit.Club, i));
-                _deck.Push(new Card(CardSuit.Diamond, i));
-                _deck.Push(new Card(CardSuit.Heart, i));
-                _deck.Push(new Card(CardSuit.Spade, i));
+                _deck.Push(new Card(i, CardSuit.Club));
+                _deck.Push(new Card(i, CardSuit.Diamond));
+                _deck.Push(new Card(i, CardSuit.Heart));
+                _deck.Push(new Card(i, CardSuit.Spade));
 
             }
             _deck.Randomize();

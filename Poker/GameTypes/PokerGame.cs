@@ -3,24 +3,26 @@ using System.Collections.Generic;
 using System.Text;
 using Poker.Models;
 using System.Linq;
+using Poker.HandEvaluators;
+using Poker.PokerHands;
 
 namespace Poker.GameTypes
 {
     public class PokerGame: AbstractGameType
     {
-        private List<Hand> _hands;
-
+        private HandRanker<IHandEvaluator> _handEvaluator;
         public PokerGame()
         {
             _hands = new List<Hand>();
+            _handEvaluator = new HandRanker<IHandEvaluator>();
         }
 
-        public Hand FindWinningHand()
+        public override HandDetails FindWinningHand()
         {
-            IHand highest;
+            HandDetails highest = new HandDetails();
             foreach (var hand in _hands)
             {
-                IHand evaluator = HandRanker.RankHand(hand);
+                HandDetails evaluator = _handEvaluator.RankHand(hand);
                 if (evaluator > highest)
                 {
                     highest = evaluator;

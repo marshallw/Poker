@@ -4,7 +4,7 @@ using System.Text;
 
 namespace Poker.HandEvaluators
 {
-    interface IPokerHandEvaluator: IHandEvaluator
+    public interface IPokerHandEvaluator: IHandEvaluator
     {
     }
 }

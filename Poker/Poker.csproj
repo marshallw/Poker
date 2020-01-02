@@ -1,11 +1,13 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="HandComparators\" />
+    <Compile Remove="HandComparators\**" />
+    <EmbeddedResource Remove="HandComparators\**" />
+    <None Remove="HandComparators\**" />
   </ItemGroup>
 
 </Project>

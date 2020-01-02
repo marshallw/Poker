@@ -13,7 +13,8 @@ namespace Poker
         private List<IHandEvaluator> evaluators;
         public HandRanker()
         {
-
+            evaluators = new List<IHandEvaluator>();
+            LoadEvaluators();
         }
 
         private void LoadEvaluators()
@@ -24,24 +25,17 @@ namespace Poker
 
             foreach (Type pluginType in test)
             {
-                var evaluator = Activator.CreateInstance(pluginType) as IHandEvaluator;
+                var evaluator = Activator.CreateInstance(pluginType) as IPokerHandEvaluator;
                 if (evaluator != null)
                     evaluators.Add(evaluator);
             }
         }
-        public IHand RankHand(Hand hand)
+        public HandDetails RankHand(Hand hand)
         {
-            HandValue result;
-            _ = evaluators.Where(_ => _.IsHandThis(hand)).Select(_ => _.GetHandValue(hand)).FirstOrDefault();
-            foreach (var evaluator in evaluators)
-            {
-                if (evaluator.IsHandThis(hand))
-                {
-                    result = evaluator.GetHandValue(hand);
-                }
-            }
+            HandDetails result;
+            result = evaluators.Where(_ => _.IsHandThis(hand)).Select(_ => _.GetHandValue(hand)).OrderByDescending(_ => _).FirstOrDefault();
 
-            return null;
+            return result;
         }
     }
 }
