@@ -12,7 +12,7 @@ namespace Poker.HandEvaluators
         public HandDetails GetHandValue(Hand hand)
         {
             if (!IsHandThis(hand))
-                throw new HandIsNotThisTypeException("Hand is not a Flush and cannot be evaluated");
+                throw new HandIsNotThisTypeException("Hand is not a Three of a Kind and cannot be evaluated");
 
             var card = hand.cards.OrderByDescending(_ => _.CardValue).GroupBy(_ => _.CardValue).Where(_ => _.Count() == 3).First().First();
 

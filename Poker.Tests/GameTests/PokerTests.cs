@@ -12,9 +12,9 @@ namespace Poker.Tests.GameTests
     {
 
         [TestCase]
-        public void Poker_CHallenge1_TestCase1()
+        public void Poker_Challenge1_TestCase1()
         {
-            PokerGame game = new PokerGame();
+            GameTypes.Poker game = new GameTypes.Poker();
 
             var joe = new Hand(new Card(3, CardSuit.Heart),
                                   new Card(6, CardSuit.Heart),
@@ -40,9 +40,9 @@ namespace Poker.Tests.GameTests
         }
 
         [TestCase]
-        public void Poker_CHallenge1_TestCase2()
+        public void Poker_Challenge1_TestCase2()
         {
-            PokerGame game = new PokerGame();
+            GameTypes.Poker game = new GameTypes.Poker();
 
             var joe = new Hand(new Card(3, CardSuit.Heart),
                                   new Card(4, CardSuit.Diamond),

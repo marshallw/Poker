@@ -14,7 +14,7 @@ namespace Poker.HandEvaluators
         public HandDetails GetHandValue(Hand hand)
         {
             if (!IsHandThis(hand))
-                throw new HandIsNotThisTypeException("Hand is not a Flush and cannot be evaluated");
+                throw new HandIsNotThisTypeException("Hand is not a Pair and cannot be evaluated");
 
             List<Card> cards = hand.cards.OrderByDescending(_ => _).GroupBy(_ => _.CardValue)
                                          .Where(_ => _.Count() == 2).SelectMany(_ => _).Distinct<Card>(new CardValueEqualityComparer()).ToList();

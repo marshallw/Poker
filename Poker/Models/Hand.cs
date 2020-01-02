@@ -46,7 +46,16 @@ namespace Poker.Models
             }
 
             if (result)
-                result = hand.Equals(this);
+            {
+                foreach (var card in hand.cards)
+                {
+                    if (!cards.Any(_ => _ == card))
+                    {
+                        result = false;
+                        break;
+                    }
+                }
+            }
 
             return result;
         }

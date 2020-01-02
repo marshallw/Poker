@@ -11,15 +11,16 @@ namespace Poker.HandEvaluators
     {
         public bool IsHandThis(Hand hand)
         {
-            if (!IsHandThis(hand))
-                throw new HandIsNotThisTypeException("Hand is not a Flush and cannot be evaluated");
-
             return hand.cards.OrderByDescending(x => x.CardValue).FirstOrDefault() != null;
         }
 
         public HandDetails GetHandValue(Hand hand)
         {
+            if (!IsHandThis(hand))
+                throw new HandIsNotThisTypeException("Hand is not a Flush and cannot be evaluated");
+
             var cardsInOrder = hand.cards.OrderByDescending(_ => _);
+
             return HandDetails.Create(hand, new HandValue(0, cardsInOrder));
         }
     }

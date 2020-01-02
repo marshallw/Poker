@@ -13,7 +13,7 @@ namespace Poker.HandEvaluators
         public HandDetails GetHandValue(Hand hand)
         {
             if (!IsHandThis(hand))
-                throw new HandIsNotThisTypeException("Hand is not a Flush and cannot be evaluated");
+                throw new HandIsNotThisTypeException("Hand is not a Straight and cannot be evaluated");
 
             var highCard = hand.cards.OrderByDescending(_ => _.CardValue).Distinct<Card>(new CardValueEqualityComparer()).First();
 

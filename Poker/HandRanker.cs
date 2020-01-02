@@ -29,9 +29,10 @@ namespace Poker
                     evaluators.Add(evaluator);
             }
         }
-        public HandDetails RankHand(Hand hand)
+        public HandDetails RankHand(params Hand[] hands)
         {
-            return  evaluators.Where(_ => _.IsHandThis(hand)).Select(_ => _.GetHandValue(hand)).OrderByDescending(_ => _).FirstOrDefault();
+            var collectiveCards = new Hand(hands.ToList().Select(_ => _.cards).SelectMany(_ => _).ToArray());
+            return  evaluators.Where(_ => _.IsHandThis(collectiveCards)).Select(_ => _.GetHandValue(collectiveCards)).OrderByDescending(_ => _).FirstOrDefault();
         }
     }
 }

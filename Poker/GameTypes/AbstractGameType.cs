@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Linq;
 using Poker.Models;
+using Poker.HandEvaluators;
 
 namespace Poker.GameTypes
 {
@@ -10,6 +11,7 @@ namespace Poker.GameTypes
     {
         protected List<Hand> hands;
         protected int maxHandSize = 5;
+        protected HandRanker<IPokerHandEvaluator> handEvaluator;
 
         public int MaxHandSize => maxHandSize;
 

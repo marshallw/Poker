@@ -13,7 +13,7 @@ namespace Poker.HandEvaluators
         public HandDetails GetHandValue(Hand hand)
         {
             if (!IsHandThis(hand))
-                throw new HandIsNotThisTypeException("Hand is not a Flush and cannot be evaluated");
+                throw new HandIsNotThisTypeException("Hand is not a Full House and cannot be evaluated");
 
             var cards = hand.cards.GroupBy(_ => _.CardValue).OrderByDescending(_ => _.Count())
                                   .SelectMany(_ => _).Distinct(new CardValueEqualityComparer());

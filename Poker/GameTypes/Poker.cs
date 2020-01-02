@@ -7,11 +7,9 @@ using Poker.HandEvaluators;
 
 namespace Poker.GameTypes
 {
-    public class PokerGame: AbstractGameType
+    public class Poker: AbstractGameType
     {
-        private HandRanker<IPokerHandEvaluator> handEvaluator;
-
-        public PokerGame()
+        public Poker()
         {
             hands = new List<Hand>();
             handEvaluator = new HandRanker<IPokerHandEvaluator>();
