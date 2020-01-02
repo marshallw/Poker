@@ -19,7 +19,7 @@ namespace Poker.GameTypes
             {
                 if (hand.cards.Count != _maxHandSize)
                 {
-                    throw new HandWrongSizeException($"Hand is wrong size.  Expected: {_maxHandSize}.  Actual: {hand.cards.Count}");
+                    throw new HandWrongSizeException($"Hand is too large.  Max: {_maxHandSize}.  Actual: {hand.cards.Count}");
                 }
 
                 _hands.Add(hand);

@@ -13,12 +13,12 @@ namespace Poker.Tests.HandEvaluatorTests
         [TestCase]
         public void Flush_IsValid()
         {
-            Hand hand = new Hand(5);
-            hand.AddCard(new Card(CardSuit.Club, 2));
-            hand.AddCard(new Card(CardSuit.Club, 4));
-            hand.AddCard(new Card(CardSuit.Club, 3));
-            hand.AddCard(new Card(CardSuit.Club, 7));
-            hand.AddCard(new Card(CardSuit.Club, 8));
+            Hand hand = new Hand();
+            hand.AddCard(new Card(2, CardSuit.Club));
+            hand.AddCard(new Card(4, CardSuit.Club));
+            hand.AddCard(new Card(3, CardSuit.Club));
+            hand.AddCard(new Card(7, CardSuit.Club));
+            hand.AddCard(new Card(8, CardSuit.Club));
 
             IPokerHandEvaluator evaluator = new FlushHandEvaluator();
 
@@ -28,12 +28,12 @@ namespace Poker.Tests.HandEvaluatorTests
         [TestCase]
         public void Flush2_IsValid()
         {
-            Hand hand = new Hand(5);
-            hand.AddCard(new Card(CardSuit.Diamond, 14));
-            hand.AddCard(new Card(CardSuit.Diamond, 6));
-            hand.AddCard(new Card(CardSuit.Diamond, 10));
-            hand.AddCard(new Card(CardSuit.Diamond, 11));
-            hand.AddCard(new Card(CardSuit.Diamond, 13));
+            Hand hand = new Hand();
+            hand.AddCard(new Card(14, CardSuit.Diamond));
+            hand.AddCard(new Card(6, CardSuit.Diamond));
+            hand.AddCard(new Card(10, CardSuit.Diamond));
+            hand.AddCard(new Card(11, CardSuit.Diamond));
+            hand.AddCard(new Card(13, CardSuit.Diamond));
 
             IPokerHandEvaluator evaluator = new FlushHandEvaluator();
 
@@ -43,12 +43,12 @@ namespace Poker.Tests.HandEvaluatorTests
         [TestCase]
         public void Flush_IsNotValid()
         {
-            Hand hand = new Hand(5);
-            hand.AddCard(new Card(CardSuit.Club, 4));
-            hand.AddCard(new Card(CardSuit.Diamond, 6));
-            hand.AddCard(new Card(CardSuit.Diamond, 4));
-            hand.AddCard(new Card(CardSuit.Spade, 3));
-            hand.AddCard(new Card(CardSuit.Club, 3));
+            Hand hand = new Hand();
+            hand.AddCard(new Card(4, CardSuit.Club));
+            hand.AddCard(new Card(6, CardSuit.Diamond));
+            hand.AddCard(new Card(4, CardSuit.Diamond));
+            hand.AddCard(new Card(3, CardSuit.Spade));
+            hand.AddCard(new Card(3, CardSuit.Club));
 
             IPokerHandEvaluator evaluator = new FlushHandEvaluator();
 
@@ -58,12 +58,12 @@ namespace Poker.Tests.HandEvaluatorTests
         [TestCase]
         public void Flush2_IsNotValid()
         {
-            Hand hand = new Hand(5);
-            hand.AddCard(new Card(CardSuit.Diamond, 4));
-            hand.AddCard(new Card(CardSuit.Diamond, 6));
-            hand.AddCard(new Card(CardSuit.Diamond, 3));
-            hand.AddCard(new Card(CardSuit.Diamond, 9));
-            hand.AddCard(new Card(CardSuit.Heart, 4));
+            Hand hand = new Hand();
+            hand.AddCard(new Card(4, CardSuit.Diamond));
+            hand.AddCard(new Card(6, CardSuit.Diamond));
+            hand.AddCard(new Card(3, CardSuit.Diamond));
+            hand.AddCard(new Card(9, CardSuit.Diamond));
+            hand.AddCard(new Card(4, CardSuit.Heart));
 
             IPokerHandEvaluator evaluator = new FlushHandEvaluator();
 
@@ -73,39 +73,39 @@ namespace Poker.Tests.HandEvaluatorTests
         [TestCase]
         public void Flush_CreatesCorrectHandValue_IsValid()
         {
-            Hand hand = new Hand(5);
-            hand.AddCard(new Card(CardSuit.Diamond, 6));
-            hand.AddCard(new Card(CardSuit.Diamond, 9));
-            hand.AddCard(new Card(CardSuit.Diamond, 4));
-            hand.AddCard(new Card(CardSuit.Diamond, 8));
-            hand.AddCard(new Card(CardSuit.Diamond, 5));
+            Hand hand = new Hand();
+            hand.AddCard(new Card(6, CardSuit.Diamond));
+            hand.AddCard(new Card(9, CardSuit.Diamond));
+            hand.AddCard(new Card(4, CardSuit.Diamond));
+            hand.AddCard(new Card(8, CardSuit.Diamond));
+            hand.AddCard(new Card(5, CardSuit.Diamond));
 
             IPokerHandEvaluator evaluator = new FlushHandEvaluator();
 
-            Assert.AreEqual(evaluator.GetHandValue(hand).HandValue, new HandValue(5, new Card(CardSuit.Diamond,9),
-                                                                                     new Card(CardSuit.Diamond, 8),
-                                                                                     new Card(CardSuit.Diamond, 6),
-                                                                                     new Card(CardSuit.Diamond, 5),
-                                                                                     new Card(CardSuit.Diamond, 4)));
+            Assert.AreEqual(evaluator.GetHandValue(hand).HandValue, new HandValue(5, new Card(9, CardSuit.Diamond),
+                                                                                     new Card(8, CardSuit.Diamond),
+                                                                                     new Card(6, CardSuit.Diamond),
+                                                                                     new Card(5, CardSuit.Diamond),
+                                                                                     new Card(4, CardSuit.Diamond)));
         }
 
         [TestCase]
         public void Flush_CreatesCorrectHandValue2_IsValid()
         {
-            Hand hand = new Hand(5);
-            hand.AddCard(new Card(CardSuit.Club, CardValue.Jack));
-            hand.AddCard(new Card(CardSuit.Club, CardValue.Ten));
-            hand.AddCard(new Card(CardSuit.Club, CardValue.Queen));
-            hand.AddCard(new Card(CardSuit.Club, CardValue.King));
-            hand.AddCard(new Card(CardSuit.Club, CardValue.Ace));
+            Hand hand = new Hand();
+            hand.AddCard(new Card(CardValue.Jack, CardSuit.Club));
+            hand.AddCard(new Card(CardValue.Ten, CardSuit.Club));
+            hand.AddCard(new Card(CardValue.Queen, CardSuit.Club));
+            hand.AddCard(new Card(CardValue.King, CardSuit.Club));
+            hand.AddCard(new Card(CardValue.Ace, CardSuit.Club));
 
             IPokerHandEvaluator evaluator = new FlushHandEvaluator();
 
-            Assert.AreEqual(evaluator.GetHandValue(hand).HandValue, new HandValue(5, new Card(CardSuit.Club, CardValue.Ace),
-                                                                                     new Card(CardSuit.Club, CardValue.King),
-                                                                                     new Card(CardSuit.Club, CardValue.Queen),
-                                                                                     new Card(CardSuit.Club, CardValue.Jack),
-                                                                                     new Card(CardSuit.Club, CardValue.Ten)));
+            Assert.AreEqual(evaluator.GetHandValue(hand).HandValue, new HandValue(5, new Card(CardValue.Ace, CardSuit.Club),
+                                                                                     new Card(CardValue.King, CardSuit.Club),
+                                                                                     new Card(CardValue.Queen, CardSuit.Club),
+                                                                                     new Card(CardValue.Jack, CardSuit.Club),
+                                                                                     new Card(CardValue.Ten, CardSuit.Club)));
         }
     }
 }

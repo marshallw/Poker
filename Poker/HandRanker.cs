@@ -25,7 +25,7 @@ namespace Poker
 
             foreach (Type pluginType in test)
             {
-                var evaluator = Activator.CreateInstance(pluginType) as IPokerHandEvaluator;
+                var evaluator = Activator.CreateInstance(pluginType) as IHandEvaluator;
                 if (evaluator != null)
                     evaluators.Add(evaluator);
             }

@@ -15,11 +15,11 @@ namespace Poker.Tests.HandEvaluatorTests
         {
             Hand hand = new Hand();
 
-            hand.AddCard(new Card(CardSuit.Club, 2));
-            hand.AddCard(new Card(CardSuit.Diamond, 3));
-            hand.AddCard(new Card(CardSuit.Heart, 5));
-            hand.AddCard(new Card(CardSuit.Heart, 3));
-            hand.AddCard(new Card(CardSuit.Club, 5));
+            hand.AddCard(new Card(2, CardSuit.Club));
+            hand.AddCard(new Card(3, CardSuit.Diamond));
+            hand.AddCard(new Card(5, CardSuit.Heart));
+            hand.AddCard(new Card(3, CardSuit.Heart));
+            hand.AddCard(new Card(5, CardSuit.Club));
 
             PairHandEvaluator evaluator = new PairHandEvaluator();
             Assert.IsTrue(evaluator.IsHandThis(hand));
@@ -30,11 +30,11 @@ namespace Poker.Tests.HandEvaluatorTests
         {
             Hand hand = new Hand();
 
-            hand.AddCard(new Card(CardSuit.Club, 2));
-            hand.AddCard(new Card(CardSuit.Diamond, 3));
-            hand.AddCard(new Card(CardSuit.Club, 6));
-            hand.AddCard(new Card(CardSuit.Heart, 4));
-            hand.AddCard(new Card(CardSuit.Club, 5));
+            hand.AddCard(new Card(2, CardSuit.Club));
+            hand.AddCard(new Card(3, CardSuit.Diamond));
+            hand.AddCard(new Card(6, CardSuit.Club));
+            hand.AddCard(new Card(4, CardSuit.Heart));
+            hand.AddCard(new Card(5, CardSuit.Club));
 
             PairHandEvaluator evaluator = new PairHandEvaluator();
             Assert.IsFalse(evaluator.IsHandThis(hand));
@@ -45,17 +45,17 @@ namespace Poker.Tests.HandEvaluatorTests
         {
             Hand hand = new Hand();
 
-            hand.AddCard(new Card(CardSuit.Club, 6));
-            hand.AddCard(new Card(CardSuit.Diamond, 4));
-            hand.AddCard(new Card(CardSuit.Club, 3));
-            hand.AddCard(new Card(CardSuit.Heart, 4));
-            hand.AddCard(new Card(CardSuit.Club, 3));
+            hand.AddCard(new Card(6, CardSuit.Club));
+            hand.AddCard(new Card(4, CardSuit.Diamond));
+            hand.AddCard(new Card(3, CardSuit.Club));
+            hand.AddCard(new Card(4, CardSuit.Heart));
+            hand.AddCard(new Card(3, CardSuit.Club));
 
             PairHandEvaluator evaluator = new PairHandEvaluator();
             //Assert.IsFalse(evaluator.IsHandThis(hand));
-            Assert.AreEqual(evaluator.GetHandValue(hand).HandValue, new HandValue(1, new Card(CardSuit.Diamond, 4),
-                                                                                     new Card(CardSuit.Diamond, 3),
-                                                                                     new Card(CardSuit.Diamond, 6)));
+            Assert.AreEqual(evaluator.GetHandValue(hand).HandValue, new HandValue(1, new Card(4, CardSuit.Diamond),
+                                                                                     new Card(3, CardSuit.Diamond),
+                                                                                     new Card(6, CardSuit.Diamond)));
         }
 
         [TestCase]
@@ -63,11 +63,11 @@ namespace Poker.Tests.HandEvaluatorTests
         {
             Hand hand = new Hand();
 
-            hand.AddCard(new Card(CardSuit.Club, 2));
-            hand.AddCard(new Card(CardSuit.Diamond, 3));
-            hand.AddCard(new Card(CardSuit.Club, 3));
-            hand.AddCard(new Card(CardSuit.Heart, 3));
-            hand.AddCard(new Card(CardSuit.Club, 5));
+            hand.AddCard(new Card(2, CardSuit.Club));
+            hand.AddCard(new Card(3, CardSuit.Diamond));
+            hand.AddCard(new Card(3, CardSuit.Club));
+            hand.AddCard(new Card(3, CardSuit.Heart));
+            hand.AddCard(new Card(5, CardSuit.Club));
 
             PairHandEvaluator evaluator = new PairHandEvaluator();
             Assert.IsFalse(evaluator.IsHandThis(hand));
@@ -78,17 +78,17 @@ namespace Poker.Tests.HandEvaluatorTests
         {
             Hand hand = new Hand();
 
-            hand.AddCard(new Card(CardSuit.Club, 2));
-            hand.AddCard(new Card(CardSuit.Diamond, 3));
-            hand.AddCard(new Card(CardSuit.Club, 6));
-            hand.AddCard(new Card(CardSuit.Heart, 4));
-            hand.AddCard(new Card(CardSuit.Club, 3));
+            hand.AddCard(new Card(2, CardSuit.Club));
+            hand.AddCard(new Card(3, CardSuit.Diamond));
+            hand.AddCard(new Card(6, CardSuit.Club));
+            hand.AddCard(new Card(4, CardSuit.Heart));
+            hand.AddCard(new Card(3, CardSuit.Club));
 
             PairHandEvaluator evaluator = new PairHandEvaluator();
-            Assert.AreEqual(evaluator.GetHandValue(hand).HandValue, new HandValue(1, new Card(CardSuit.Diamond,3), 
-                                                                                     new Card(CardSuit.Diamond, 6),
-                                                                                     new Card(CardSuit.Diamond, 4),
-                                                                                     new Card(CardSuit.Diamond, 2)));
+            Assert.AreEqual(evaluator.GetHandValue(hand).HandValue, new HandValue(1, new Card(3, CardSuit.Diamond), 
+                                                                                     new Card(6, CardSuit.Diamond),
+                                                                                     new Card(4, CardSuit.Diamond),
+                                                                                     new Card(2, CardSuit.Diamond)));
         }
     }
 }

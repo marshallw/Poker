@@ -16,23 +16,23 @@ namespace Poker.Tests.GameTests
         {
             PokerGame game = new PokerGame();
 
-            var joe = new Hand(new Card(CardSuit.Heart, 3),
-                                  new Card(CardSuit.Heart, 6),
-                                  new Card(CardSuit.Heart, 8),
-                                  new Card(CardSuit.Heart, CardValue.Jack),
-                                  new Card(CardSuit.Heart, CardValue.King));
+            var joe = new Hand(new Card(3, CardSuit.Heart),
+                                  new Card(6, CardSuit.Heart),
+                                  new Card(8, CardSuit.Heart),
+                                  new Card(CardValue.Jack, CardSuit.Heart),
+                                  new Card(CardValue.King, CardSuit.Heart));
 
-            var jen = new Hand(new Card(CardSuit.Club, 3),
-                                  new Card(CardSuit.Diamond, 3),
-                                  new Card(CardSuit.Spade, 3),
-                                  new Card(CardSuit.Club, 8),
-                                  new Card(CardSuit.Diamond, 10));
+            var jen = new Hand(new Card(3, CardSuit.Club),
+                                  new Card(3, CardSuit.Diamond),
+                                  new Card(3, CardSuit.Spade),
+                                  new Card(8, CardSuit.Club),
+                                  new Card(10, CardSuit.Diamond));
 
-            var bob = new Hand(new Card(CardSuit.Heart, CardValue.Two),
-                                  new Card(CardSuit.Club, CardValue.Five),
-                                  new Card(CardSuit.Spade, CardValue.Seven),
-                                  new Card(CardSuit.Club, CardValue.Ten),
-                                  new Card(CardSuit.Club, CardValue.Ace));
+            var bob = new Hand(new Card(CardValue.Two, CardSuit.Heart),
+                                  new Card(CardValue.Five, CardSuit.Club),
+                                  new Card(CardValue.Seven, CardSuit.Spade),
+                                  new Card(CardValue.Ten, CardSuit.Club),
+                                  new Card(CardValue.Ace, CardSuit.Club));
 
             game.AddHand(joe, jen, bob);
 
@@ -44,23 +44,23 @@ namespace Poker.Tests.GameTests
         {
             PokerGame game = new PokerGame();
 
-            var joe = new Hand(new Card(CardSuit.Heart, 3),
-                                  new Card(CardSuit.Diamond, 4),
-                                  new Card(CardSuit.Club, 9),
-                                  new Card(CardSuit.Diamond, 9),
-                                  new Card(CardSuit.Heart, CardValue.Queen));
+            var joe = new Hand(new Card(3, CardSuit.Heart),
+                                  new Card(4, CardSuit.Diamond),
+                                  new Card(9, CardSuit.Club),
+                                  new Card(9, CardSuit.Diamond),
+                                  new Card(CardValue.Queen, CardSuit.Heart));
 
-            var jen = new Hand(new Card(CardSuit.Club, 5),
-                                  new Card(CardSuit.Diamond, 7),
-                                  new Card(CardSuit.Heart, 9),
-                                  new Card(CardSuit.Spade, 9),
-                                  new Card(CardSuit.Spade, CardValue.Queen));
+            var jen = new Hand(new Card(5, CardSuit.Club),
+                                  new Card(7, CardSuit.Diamond),
+                                  new Card(9, CardSuit.Heart),
+                                  new Card(9, CardSuit.Spade),
+                                  new Card(CardValue.Queen, CardSuit.Spade));
 
-            var bob = new Hand(new Card(CardSuit.Heart, CardValue.Two),
-                                  new Card(CardSuit.Club, CardValue.Two),
-                                  new Card(CardSuit.Spade, CardValue.Five),
-                                  new Card(CardSuit.Club, CardValue.Ten),
-                                  new Card(CardSuit.Heart, CardValue.Ace));
+            var bob = new Hand(new Card(CardValue.Two, CardSuit.Heart),
+                                  new Card(CardValue.Two, CardSuit.Club),
+                                  new Card(CardValue.Five, CardSuit.Spade),
+                                  new Card(CardValue.Ten, CardSuit.Club),
+                                  new Card(CardValue.Ace, CardSuit.Heart));
 
             game.AddHand(joe, jen, bob);
 

@@ -14,11 +14,11 @@ namespace Poker.Tests.HandEvaluatorTests
         public void FullHouse_IsValid()
         {
             Hand hand = new Hand(5);
-            hand.AddCard(new Card(CardSuit.Club, 2));
-            hand.AddCard(new Card(CardSuit.Diamond, 2));
-            hand.AddCard(new Card(CardSuit.Heart, 3));
-            hand.AddCard(new Card(CardSuit.Spade, 3));
-            hand.AddCard(new Card(CardSuit.Club, 3));
+            hand.AddCard(new Card(2, CardSuit.Club));
+            hand.AddCard(new Card(2, CardSuit.Diamond));
+            hand.AddCard(new Card(3, CardSuit.Heart));
+            hand.AddCard(new Card(3, CardSuit.Spade));
+            hand.AddCard(new Card(3, CardSuit.Club));
 
             IPokerHandEvaluator evaluator = new FullHouseEvaluator();
 
@@ -29,11 +29,11 @@ namespace Poker.Tests.HandEvaluatorTests
         public void FullHouse2_IsValid()
         {
             Hand hand = new Hand(5);
-            hand.AddCard(new Card(CardSuit.Diamond, 13));
-            hand.AddCard(new Card(CardSuit.Diamond, 3));
-            hand.AddCard(new Card(CardSuit.Heart, 3));
-            hand.AddCard(new Card(CardSuit.Spade, 3));
-            hand.AddCard(new Card(CardSuit.Club, 13));
+            hand.AddCard(new Card(13, CardSuit.Diamond));
+            hand.AddCard(new Card(3, CardSuit.Diamond));
+            hand.AddCard(new Card(3, CardSuit.Heart));
+            hand.AddCard(new Card(3, CardSuit.Spade));
+            hand.AddCard(new Card(13, CardSuit.Club));
 
             IPokerHandEvaluator evaluator = new FullHouseEvaluator();
 
@@ -44,11 +44,11 @@ namespace Poker.Tests.HandEvaluatorTests
         public void FourOfAKind_IsNotValid()
         {
             Hand hand = new Hand(5);
-            hand.AddCard(new Card(CardSuit.Club, 4));
-            hand.AddCard(new Card(CardSuit.Diamond, 6));
-            hand.AddCard(new Card(CardSuit.Diamond, 4));
-            hand.AddCard(new Card(CardSuit.Spade, 3));
-            hand.AddCard(new Card(CardSuit.Club, 3));
+            hand.AddCard(new Card(4, CardSuit.Club));
+            hand.AddCard(new Card(6, CardSuit.Diamond));
+            hand.AddCard(new Card(4, CardSuit.Diamond));
+            hand.AddCard(new Card(3, CardSuit.Spade));
+            hand.AddCard(new Card(3, CardSuit.Club));
 
             IPokerHandEvaluator evaluator = new FullHouseEvaluator();
 
@@ -59,11 +59,11 @@ namespace Poker.Tests.HandEvaluatorTests
         public void FullHouse2_IsNotValid()
         {
             Hand hand = new Hand(5);
-            hand.AddCard(new Card(CardSuit.Club, 4));
-            hand.AddCard(new Card(CardSuit.Diamond, 6));
-            hand.AddCard(new Card(CardSuit.Diamond, 3));
-            hand.AddCard(new Card(CardSuit.Spade, 4));
-            hand.AddCard(new Card(CardSuit.Heart, 4));
+            hand.AddCard(new Card(4, CardSuit.Club));
+            hand.AddCard(new Card(6, CardSuit.Diamond));
+            hand.AddCard(new Card(3, CardSuit.Diamond));
+            hand.AddCard(new Card(4, CardSuit.Spade));
+            hand.AddCard(new Card(4, CardSuit.Heart));
 
             IPokerHandEvaluator evaluator = new FullHouseEvaluator();
 
@@ -74,32 +74,32 @@ namespace Poker.Tests.HandEvaluatorTests
         public void FullHouse_CreatesCorrectHandValue_IsValid()
         {
             Hand hand = new Hand(5);
-            hand.AddCard(new Card(CardSuit.Club, 6));
-            hand.AddCard(new Card(CardSuit.Diamond, 6));
-            hand.AddCard(new Card(CardSuit.Diamond, 4));
-            hand.AddCard(new Card(CardSuit.Spade, 4));
-            hand.AddCard(new Card(CardSuit.Heart, 4));
+            hand.AddCard(new Card(6, CardSuit.Club));
+            hand.AddCard(new Card(6, CardSuit.Diamond));
+            hand.AddCard(new Card(4, CardSuit.Diamond));
+            hand.AddCard(new Card(4, CardSuit.Spade));
+            hand.AddCard(new Card(4, CardSuit.Heart));
 
             IPokerHandEvaluator evaluator = new FullHouseEvaluator();
 
-            Assert.AreEqual(evaluator.GetHandValue(hand).HandValue, new HandValue(6, new Card(CardSuit.Spade, 4),
-                                                                                     new Card(CardSuit.Heart, 6)));
+            Assert.AreEqual(evaluator.GetHandValue(hand).HandValue, new HandValue(6, new Card(4, CardSuit.Spade),
+                                                                                     new Card(6, CardSuit.Heart)));
         }
 
         [TestCase]
         public void FullHouse_CreatesCorrectHandValue2_IsValid()
         {
             Hand hand = new Hand(5);
-            hand.AddCard(new Card(CardSuit.Club, 11));
-            hand.AddCard(new Card(CardSuit.Heart, 11));
-            hand.AddCard(new Card(CardSuit.Diamond, 11));
-            hand.AddCard(new Card(CardSuit.Spade, 2));
-            hand.AddCard(new Card(CardSuit.Club, 2));
+            hand.AddCard(new Card(11, CardSuit.Club));
+            hand.AddCard(new Card(11, CardSuit.Heart));
+            hand.AddCard(new Card(2, CardSuit.Diamond));
+            hand.AddCard(new Card(11, CardSuit.Spade));
+            hand.AddCard(new Card(2, CardSuit.Club));
 
             IPokerHandEvaluator evaluator = new FullHouseEvaluator();
 
-            Assert.AreEqual(evaluator.GetHandValue(hand).HandValue, new HandValue(6, new Card(CardSuit.Spade, 11),
-                                                                                     new Card(CardSuit.Diamond, 2)));
+            Assert.AreEqual(evaluator.GetHandValue(hand).HandValue, new HandValue(6, new Card(11, CardSuit.Spade),
+                                                                                     new Card(2, CardSuit.Diamond)));
         }
     }
 }

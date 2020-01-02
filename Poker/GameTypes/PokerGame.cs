@@ -10,11 +10,11 @@ namespace Poker.GameTypes
 {
     public class PokerGame: AbstractGameType
     {
-        private HandRanker<IHandEvaluator> _handEvaluator;
+        private HandRanker<IPokerHandEvaluator> _handEvaluator;
         public PokerGame()
         {
             _hands = new List<Hand>();
-            _handEvaluator = new HandRanker<IHandEvaluator>();
+            _handEvaluator = new HandRanker<IPokerHandEvaluator>();
         }
 
         public override HandDetails FindWinningHand()

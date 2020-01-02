@@ -7,11 +7,6 @@ namespace Poker.Models
 {
     public class Hand
     {
-        private int _maxHandSize;
-        public int MaxHandSize
-        {
-            get => _maxHandSize;
-        }
         public List<Card> cards;
 
         public Hand(params Card[] newCards)
@@ -19,27 +14,15 @@ namespace Poker.Models
             cards = new List<Card>();
             cards.AddRange(newCards);
         }
-
-        public Hand(int maxHandSize)
-        {
-            _maxHandSize = maxHandSize;
-            cards = new List<Card>();
-        }
         public Hand()
         {
             cards = new List<Card>();
-            _maxHandSize = 5;
         }
 
-        public bool AddCard(Card card)
+        public void AddCard(Card card)
         {
-            bool result = false;
-            if (cards.Count < _maxHandSize)
-            {
                 cards.Add(card);
-                result = true;
-            }
-            return result;
+          
         }
 
         public bool RemoveCard(Card card)

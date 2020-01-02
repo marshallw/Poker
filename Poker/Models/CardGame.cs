@@ -22,10 +22,10 @@ namespace Poker.Models
 
             for(int i= 0; i <= 13; i++)
             {
-                cards.Add(new Card(CardSuit.Club, i));
-                cards.Add(new Card(CardSuit.Diamond, i));
-                cards.Add(new Card(CardSuit.Heart, i));
-                cards.Add(new Card(CardSuit.Spade, i));
+                cards.Add(new Card(i, CardSuit.Club));
+                cards.Add(new Card(i, CardSuit.Diamond));
+                cards.Add(new Card(i, CardSuit.Heart));
+                cards.Add(new Card(i, CardSuit.Spade));
             }
 
             //cards.

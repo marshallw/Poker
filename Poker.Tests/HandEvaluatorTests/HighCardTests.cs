@@ -20,12 +20,12 @@ namespace Poker.Tests.HandEvaluatorTests
         [TestCase]
         public void HighCard_IsThisHighCard()
         {
-            Hand hand = new Hand(5);
-            hand.AddCard(new Card(CardSuit.Club, 2));
-            hand.AddCard(new Card(CardSuit.Diamond, 3));
-            hand.AddCard(new Card(CardSuit.Diamond, 4));
-            hand.AddCard(new Card(CardSuit.Spade, 10));
-            hand.AddCard(new Card(CardSuit.Spade, 3));
+            Hand hand = new Hand();
+            hand.AddCard(new Card(2, CardSuit.Club));
+            hand.AddCard(new Card(3, CardSuit.Diamond));
+            hand.AddCard(new Card(4, CardSuit.Diamond));
+            hand.AddCard(new Card(10, CardSuit.Spade));
+            hand.AddCard(new Card(3, CardSuit.Spade));
 
             HighCardEvaluator evaluator = new HighCardEvaluator();
 
@@ -37,11 +37,11 @@ namespace Poker.Tests.HandEvaluatorTests
         public void HighCard_CanCreateHandValue()
         {
             Hand hand = new Hand();
-            hand.AddCard(new Card(CardSuit.Club, 2));
-            hand.AddCard(new Card(CardSuit.Diamond, 3));
-            hand.AddCard(new Card(CardSuit.Diamond, 4));
-            hand.AddCard(new Card(CardSuit.Spade, 10));
-            hand.AddCard(new Card(CardSuit.Spade, 7));
+            hand.AddCard(new Card(2, CardSuit.Club));
+            hand.AddCard(new Card(3, CardSuit.Diamond));
+            hand.AddCard(new Card(4, CardSuit.Diamond));
+            hand.AddCard(new Card(10, CardSuit.Spade));
+            hand.AddCard(new Card(7, CardSuit.Spade));
 
             IPokerHandEvaluator evaluator = new HighCardEvaluator();
 

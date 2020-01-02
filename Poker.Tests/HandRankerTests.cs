@@ -11,19 +11,12 @@ namespace Poker.Tests
     class HandRankerTests
     {
         private HandRanker<IPokerHandEvaluator> handRanker;
-        private Hand highCardHand;
-        private Hand pairHand;
-        private Hand threeOfAKindHand;
-        private Hand fourOfAKindHand;
-        private Hand flushHand;
-        private Hand straightHand;
+
 
         [SetUp]
         public void Setup()
         {
             handRanker = new HandRanker<IPokerHandEvaluator>();
-
-            highCardHand = new Hand();
         }
 
         [TestCase]
