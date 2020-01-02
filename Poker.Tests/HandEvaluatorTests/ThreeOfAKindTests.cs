@@ -13,7 +13,7 @@ namespace Poker.Tests.HandEvaluatorTests
         [TestCase]
         public void ThreeOfAKind_IsValid()
         {
-            Hand hand = new Hand(5);
+            Hand hand = new Hand();
             hand.AddCard(new Card(2, CardSuit.Club));
             hand.AddCard(new Card(3, CardSuit.Diamond));
             hand.AddCard(new Card(4, CardSuit.Diamond));
@@ -28,7 +28,7 @@ namespace Poker.Tests.HandEvaluatorTests
         [TestCase]
         public void ThreeOfAKind2_IsValid()
         {
-            Hand hand = new Hand(5);
+            Hand hand = new Hand();
             hand.AddCard(new Card(4, CardSuit.Club));
             hand.AddCard(new Card(3, CardSuit.Diamond));
             hand.AddCard(new Card(4, CardSuit.Diamond));
@@ -43,7 +43,7 @@ namespace Poker.Tests.HandEvaluatorTests
         [TestCase]
         public void ThreeOfAKind_IsNotValid()
         {
-            Hand hand = new Hand(5);
+            Hand hand = new Hand();
             hand.AddCard(new Card(4, CardSuit.Club));
             hand.AddCard(new Card(6, CardSuit.Diamond));
             hand.AddCard(new Card(4, CardSuit.Diamond));
@@ -58,7 +58,7 @@ namespace Poker.Tests.HandEvaluatorTests
         [TestCase]
         public void ThreeOfAKind2_IsNotValid()
         {
-            Hand hand = new Hand(5);
+            Hand hand = new Hand();
             hand.AddCard(new Card(4, CardSuit.Club));
             hand.AddCard(new Card(6, CardSuit.Diamond));
             hand.AddCard(new Card(4, CardSuit.Diamond));
@@ -73,7 +73,7 @@ namespace Poker.Tests.HandEvaluatorTests
         [TestCase]
         public void ThreeOfAKind_CreatesCorrectHandValue_IsValid()
         {
-            Hand hand = new Hand(5);
+            Hand hand = new Hand();
             hand.AddCard(new Card(4, CardSuit.Club));
             hand.AddCard(new Card(6, CardSuit.Diamond));
             hand.AddCard(new Card(4, CardSuit.Diamond));
@@ -88,7 +88,7 @@ namespace Poker.Tests.HandEvaluatorTests
         [TestCase]
         public void ThreeOfAKind_CreatesCorrectHandValue2_IsValid()
         {
-            Hand hand = new Hand(5);
+            Hand hand = new Hand();
             hand.AddCard(new Card(4, CardSuit.Club));
             hand.AddCard(new Card(9, CardSuit.Diamond));
             hand.AddCard(new Card(4, CardSuit.Diamond));

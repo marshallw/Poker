@@ -4,32 +4,22 @@ using System.Text;
 using Poker.Models;
 using System.Linq;
 using Poker.HandEvaluators;
-using Poker.PokerHands;
 
 namespace Poker.GameTypes
 {
     public class PokerGame: AbstractGameType
     {
-        private HandRanker<IPokerHandEvaluator> _handEvaluator;
+        private HandRanker<IPokerHandEvaluator> handEvaluator;
+
         public PokerGame()
         {
-            _hands = new List<Hand>();
-            _handEvaluator = new HandRanker<IPokerHandEvaluator>();
+            hands = new List<Hand>();
+            handEvaluator = new HandRanker<IPokerHandEvaluator>();
         }
 
         public override HandDetails FindWinningHand()
         {
-            HandDetails highest = new HandDetails();
-            foreach (var hand in _hands)
-            {
-                HandDetails evaluator = _handEvaluator.RankHand(hand);
-                if (evaluator > highest)
-                {
-                    highest = evaluator;
-                }
-            }
-
-            return highest;
+            return hands.Select(_ => handEvaluator.RankHand(_)).OrderByDescending(_ => _).First();
         }
     }
 }

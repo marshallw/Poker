@@ -12,7 +12,6 @@ namespace Poker.GameTypes
 
         public HandWrongSizeException(string message) : base(message)
         {
-            
         }
 
         public HandWrongSizeException(string message, Exception innerException) : base(message, innerException)

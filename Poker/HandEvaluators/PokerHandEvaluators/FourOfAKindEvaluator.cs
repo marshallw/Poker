@@ -1,4 +1,5 @@
-﻿using Poker.Models;
+﻿using Poker.Exceptions;
+using Poker.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +11,12 @@ namespace Poker.HandEvaluators
     {
         public HandDetails GetHandValue(Hand hand)
         {
-            var highCard = hand.cards.OrderByDescending(_ => _.CardValue).GroupBy(_ => _.CardValue).Where(_ => _.Count() == 4).First().First();
+            if (!IsHandThis(hand))
+                throw new HandIsNotThisTypeException("Hand is not a Four of a Kind and cannot be evaluated");
+
+            var highCard = hand.cards.OrderByDescending(_ => _.CardValue).GroupBy(_ => _.CardValue)
+                                     .Where(_ => _.Count() == 4).First().First();
+
             return new HandDetails(hand, new HandValue(7, highCard));
         }
 

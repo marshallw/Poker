@@ -8,50 +8,49 @@ namespace Poker.Models
 {
     public class HandValue: IComparable<HandValue>
     {
-        private uint _handRank;
-        private int _rankPosition;
-        private int _rankPositionStart = 28;
-        public uint HandRank => _handRank;
+        private uint handRank;
+        private int cursor;
+        private int cursorStart = 28;
+
+        public uint HandRank => handRank;
 
         public HandValue(int handValueType, params Card[] cards)
         {
-            _rankPosition = _rankPositionStart;
-            _handRank = (uint)handValueType << _rankPosition;
-            _rankPosition -= 4;
+            cursor = cursorStart;
+            handRank = (uint)handValueType << cursor;
+            cursor -= 4;
 
             foreach (var card in cards)
             {
                 AddCardToComparison(card);
             }
-            
         }
 
         public HandValue(int handValueType, IEnumerable<Card> cards) : this(handValueType, cards.ToArray())
         {
-
         }
 
         public HandValue()
         {
-            _rankPosition = _rankPositionStart - 4;
-            _handRank = 0;
+            cursor = cursorStart - 4;
+            handRank = 0;
         }
 
         private void AddCardToComparison(Card card)
         {
-            if (_rankPosition < 0)
+            if (cursor < 0)
                 throw new Exception("Can't hold more than 7 cards to rank.");
             uint cardValue = (uint)card.CardValue;
-            cardValue = cardValue << _rankPosition;
-            _handRank = _handRank | cardValue;
-            _rankPosition -= 4;
+            cardValue = cardValue << cursor;
+            handRank = handRank | cardValue;
+            cursor -= 4;
         }
         public int CompareTo(HandValue other)
         {
             if (other == null)
                 return -1;
 
-            int result = _handRank.CompareTo(other.HandRank);
+            int result = handRank.CompareTo(other.HandRank);
 
             return result;
         }

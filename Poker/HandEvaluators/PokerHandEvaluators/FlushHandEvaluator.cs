@@ -1,4 +1,5 @@
-﻿using Poker.Models;
+﻿using Poker.Exceptions;
+using Poker.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +11,11 @@ namespace Poker.HandEvaluators
     {
         public HandDetails GetHandValue(Hand hand)
         {
-            var cards = hand.cards.OrderByDescending(_ => _.CardValue).Where((i,j) => j <= 7).ToList();
+            if (!IsHandThis(hand))
+                throw new HandIsNotThisTypeException("Hand is not a Flush and cannot be evaluated");
+
+            var cards = hand.cards.OrderByDescending(_ => _.CardValue).Where((i, j) => j <= 7).ToList();
+
             return new HandDetails(hand, new HandValue(5, cards));
         }
 

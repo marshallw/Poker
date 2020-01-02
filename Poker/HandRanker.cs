@@ -1,6 +1,5 @@
 ﻿using Poker.HandEvaluators;
 using Poker.Models;
-using Poker.PokerHands;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,23 +18,20 @@ namespace Poker
 
         private void LoadEvaluators()
         {
-            var test = from type in this.GetType().Assembly.GetTypes()
+            var evaluatorTypes = from type in this.GetType().Assembly.GetTypes()
                        where typeof(T).IsAssignableFrom(type) && !type.IsInterface
                        select type;
 
-            foreach (Type pluginType in test)
+            foreach (Type evaluatorType in evaluatorTypes)
             {
-                var evaluator = Activator.CreateInstance(pluginType) as IHandEvaluator;
+                var evaluator = Activator.CreateInstance(evaluatorType) as IHandEvaluator;
                 if (evaluator != null)
                     evaluators.Add(evaluator);
             }
         }
         public HandDetails RankHand(Hand hand)
         {
-            HandDetails result;
-            result = evaluators.Where(_ => _.IsHandThis(hand)).Select(_ => _.GetHandValue(hand)).OrderByDescending(_ => _).FirstOrDefault();
-
-            return result;
+            return  evaluators.Where(_ => _.IsHandThis(hand)).Select(_ => _.GetHandValue(hand)).OrderByDescending(_ => _).FirstOrDefault();
         }
     }
 }

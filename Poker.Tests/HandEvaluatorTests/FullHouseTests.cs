@@ -13,7 +13,7 @@ namespace Poker.Tests.HandEvaluatorTests
         [TestCase]
         public void FullHouse_IsValid()
         {
-            Hand hand = new Hand(5);
+            Hand hand = new Hand();
             hand.AddCard(new Card(2, CardSuit.Club));
             hand.AddCard(new Card(2, CardSuit.Diamond));
             hand.AddCard(new Card(3, CardSuit.Heart));
@@ -28,7 +28,7 @@ namespace Poker.Tests.HandEvaluatorTests
         [TestCase]
         public void FullHouse2_IsValid()
         {
-            Hand hand = new Hand(5);
+            Hand hand = new Hand();
             hand.AddCard(new Card(13, CardSuit.Diamond));
             hand.AddCard(new Card(3, CardSuit.Diamond));
             hand.AddCard(new Card(3, CardSuit.Heart));
@@ -43,7 +43,7 @@ namespace Poker.Tests.HandEvaluatorTests
         [TestCase]
         public void FourOfAKind_IsNotValid()
         {
-            Hand hand = new Hand(5);
+            Hand hand = new Hand();
             hand.AddCard(new Card(4, CardSuit.Club));
             hand.AddCard(new Card(6, CardSuit.Diamond));
             hand.AddCard(new Card(4, CardSuit.Diamond));
@@ -58,7 +58,7 @@ namespace Poker.Tests.HandEvaluatorTests
         [TestCase]
         public void FullHouse2_IsNotValid()
         {
-            Hand hand = new Hand(5);
+            Hand hand = new Hand();
             hand.AddCard(new Card(4, CardSuit.Club));
             hand.AddCard(new Card(6, CardSuit.Diamond));
             hand.AddCard(new Card(3, CardSuit.Diamond));
@@ -73,7 +73,7 @@ namespace Poker.Tests.HandEvaluatorTests
         [TestCase]
         public void FullHouse_CreatesCorrectHandValue_IsValid()
         {
-            Hand hand = new Hand(5);
+            Hand hand = new Hand();
             hand.AddCard(new Card(6, CardSuit.Club));
             hand.AddCard(new Card(6, CardSuit.Diamond));
             hand.AddCard(new Card(4, CardSuit.Diamond));
@@ -89,7 +89,7 @@ namespace Poker.Tests.HandEvaluatorTests
         [TestCase]
         public void FullHouse_CreatesCorrectHandValue2_IsValid()
         {
-            Hand hand = new Hand(5);
+            Hand hand = new Hand();
             hand.AddCard(new Card(11, CardSuit.Club));
             hand.AddCard(new Card(11, CardSuit.Heart));
             hand.AddCard(new Card(2, CardSuit.Diamond));
