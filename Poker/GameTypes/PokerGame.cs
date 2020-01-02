@@ -3,21 +3,23 @@ using System.Collections.Generic;
 using System.Text;
 using Poker.Models;
 using System.Linq;
+using Poker.HandEvaluators;
 
 namespace Poker.GameTypes
 {
     public class PokerGame: AbstractGameType
     {
-        private List<Hand> _hands;
+        private HandRanker<IPokerHandEvaluator> handEvaluator;
 
         public PokerGame()
         {
-            _hands = new List<Hand>();
+            hands = new List<Hand>();
+            handEvaluator = new HandRanker<IPokerHandEvaluator>();
         }
 
-        public Hand FindWinningHand()
+        public override HandDetails FindWinningHand()
         {
-            _hands.Where(hand => HandEvaluator.FindHandType(hand.cards) > _hands.FirstOrDefault(hand2 => hand != hand2 && HandEvaluators.FindHandType(hand2.cards))
+            return hands.Select(_ => handEvaluator.RankHand(_)).OrderByDescending(_ => _).First();
         }
     }
 }

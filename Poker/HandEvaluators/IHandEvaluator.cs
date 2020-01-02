@@ -6,9 +6,9 @@ using System.Linq;
 
 namespace Poker.HandEvaluators
 {
-    interface IHandEvaluator
+    public interface IHandEvaluator
     {
          bool IsHandThis(Hand hand);
-        HandValue GetHandValue(Hand hand);
+        HandDetails GetHandValue(Hand hand);
     }
 }

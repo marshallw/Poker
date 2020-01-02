@@ -18,12 +18,12 @@ namespace Tests
         public void CreatedDeckIsValid()
         {
             Deck deck = new Deck();
-            for(int i = 1; i <= 13; i++)
+            for(int i = 2; i <= 14; i++)
             {
-                deck.Push(new Card(CardSuit.Club, i));
-                deck.Push(new Card(CardSuit.Diamond, i));
-                deck.Push(new Card(CardSuit.Heart, i));
-                deck.Push(new Card(CardSuit.Spade, i));
+                deck.Push(new Card(i, CardSuit.Club));
+                deck.Push(new Card(i, CardSuit.Diamond));
+                deck.Push(new Card(i, CardSuit.Heart));
+                deck.Push(new Card(i, CardSuit.Spade));
             }
             deck.Randomize();
             foreach (var card in deck)
@@ -39,12 +39,12 @@ namespace Tests
         {
             Deck deck = new Deck();
 
-            deck.Push(new Card(CardSuit.Club, 1));
-            deck.Push(new Card(CardSuit.Heart, 10));
+            deck.Push(new Card(2, CardSuit.Club));
+            deck.Push(new Card(10, CardSuit.Heart));
 
             Card card = deck.Pop();
 
-            Assert.IsTrue(card.CardSuitName == "Heart" && card.CardValue == 10);
+            Assert.IsTrue(card.CardSuitName == "Heart" && card.CardValue == CardValue.Ten);
         }
     }
 }
