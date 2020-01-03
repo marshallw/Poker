@@ -6,18 +6,21 @@ namespace Poker.Models
 {
     public class HandDetails: IComparable<HandDetails>
     {
-        public Hand Hand { get; }
-        public HandValue HandValue { get; }
+        private Hand hand;
+        private HandValue handValue;
+
+        public Hand Hand => hand;
+        public HandValue HandValue => handValue;
 
         public HandDetails()
         {
-            Hand = null;
-            HandValue = new HandValue();
+            hand = null;
+            handValue = new HandValue();
         }
         public HandDetails(Hand hand, HandValue handValue)
         {
-            Hand = hand;
-            HandValue = handValue;
+            this.hand = hand;
+            this.handValue = handValue;
         }
         public static HandDetails Create(Hand hand, HandValue handValue)
         {
@@ -26,14 +29,14 @@ namespace Poker.Models
 
         public int CompareTo(HandDetails other)
         {
-            return HandValue.CompareTo(other.HandValue);
+            return handValue.CompareTo(other.handValue);
         }
 
         public static bool operator >(HandDetails hand1, HandDetails hand2)
         {
-            return hand1.HandValue > hand2.HandValue;
+            return hand1.handValue > hand2.handValue;
         }
 
-        public static bool operator <(HandDetails hand1, HandDetails hand2) => hand1.HandValue < hand2.HandValue;
+        public static bool operator <(HandDetails hand1, HandDetails hand2) => hand1.handValue < hand2.handValue;
     }
 }
