@@ -14,7 +14,8 @@ namespace Poker.HandEvaluators
             if (!IsHandThis(hand))
                 throw new HandIsNotThisTypeException("Hand is not a Flush and cannot be evaluated");
 
-            var cards = hand.cards.OrderByDescending(_ => _.CardValue).Where((i, j) => j <= 7).ToList();
+            var cards = hand.cards.GroupBy(_ => _.CardSuit).Where(_ => _.Count() >= 5).SelectMany(_ => _)
+                                  .OrderByDescending(_ => _.CardValue).Where((i, j) => j <= 4).ToList();
 
             return new HandDetails(hand, new HandValue(5, cards));
         }

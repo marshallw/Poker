@@ -17,9 +17,9 @@ namespace Poker.HandEvaluators
         public HandDetails GetHandValue(Hand hand)
         {
             if (!IsHandThis(hand))
-                throw new HandIsNotThisTypeException("Hand is not a Flush and cannot be evaluated");
+                throw new HandIsNotThisTypeException("Card has no high cards; are there even any cards?");
 
-            var cardsInOrder = hand.cards.OrderByDescending(_ => _);
+            var cardsInOrder = hand.cards.OrderByDescending(_ => _).Where((i, j) => j <= 4);
 
             return HandDetails.Create(hand, new HandValue(0, cardsInOrder));
         }

@@ -82,7 +82,8 @@ namespace Poker.Tests.HandEvaluatorTests
 
             FourOfAKindEvaluator evaluator = new FourOfAKindEvaluator();
 
-            Assert.AreEqual(evaluator.GetHandValue(hand).HandValue, new HandValue(7, new Card(4, CardSuit.Spade)));
+            Assert.AreEqual(evaluator.GetHandValue(hand).HandValue, new HandValue(7, new Card(4, CardSuit.Spade),
+                                                                                     new Card(6, CardSuit.Club)));
         }
 
         [TestCase]
@@ -97,7 +98,8 @@ namespace Poker.Tests.HandEvaluatorTests
 
             FourOfAKindEvaluator evaluator = new FourOfAKindEvaluator();
 
-            Assert.AreEqual(evaluator.GetHandValue(hand).HandValue, new HandValue(7, new Card(8, CardSuit.Spade)));
+            Assert.AreEqual(evaluator.GetHandValue(hand).HandValue, new HandValue(7, new Card(8, CardSuit.Spade),
+                                                                                     new Card(3, CardSuit.Club)));
         }
     }
 }

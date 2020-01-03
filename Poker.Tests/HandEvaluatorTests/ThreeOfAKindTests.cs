@@ -82,7 +82,9 @@ namespace Poker.Tests.HandEvaluatorTests
 
             ThreeOfAKindEvaluator evaluator = new ThreeOfAKindEvaluator();
 
-            Assert.AreEqual(evaluator.GetHandValue(hand).HandValue, new HandValue(2, new Card(4, CardSuit.Spade)));
+            Assert.AreEqual(evaluator.GetHandValue(hand).HandValue, new HandValue(2, new Card(4, CardSuit.Spade),
+                                                                                     new Card(6, CardSuit.Club),
+                                                                                     new Card(3, CardSuit.Club)));
         }
 
         [TestCase]
@@ -97,7 +99,9 @@ namespace Poker.Tests.HandEvaluatorTests
 
             ThreeOfAKindEvaluator evaluator = new ThreeOfAKindEvaluator();
 
-            Assert.AreEqual(evaluator.GetHandValue(hand).HandValue, new HandValue(2, new Card(4, CardSuit.Club)));
+            Assert.AreEqual(evaluator.GetHandValue(hand).HandValue, new HandValue(2, new Card(4, CardSuit.Club),
+                                                                                     new Card(9, CardSuit.Club),
+                                                                                     new Card(3, CardSuit.Club)));
         }
     }
 }

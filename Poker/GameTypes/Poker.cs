@@ -9,9 +9,8 @@ namespace Poker.GameTypes
 {
     public class Poker: AbstractGameType
     {
-        public Poker()
+        public Poker():base(5)
         {
-            hands = new List<Hand>();
             handEvaluator = new HandRanker<IPokerHandEvaluator>();
         }
 

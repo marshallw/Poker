@@ -16,8 +16,10 @@ namespace Poker.HandEvaluators
 
             var highCard = hand.cards.OrderByDescending(_ => _.CardValue).GroupBy(_ => _.CardValue)
                                      .Where(_ => _.Count() == 4).First().First();
+            var cards = new List<Card>(new Card[]{ highCard });
+            cards.Add(hand.cards.Where(_ => _.CardValue != highCard.CardValue).OrderByDescending(_ => _.CardValue).First());
 
-            return new HandDetails(hand, new HandValue(7, highCard));
+            return new HandDetails(hand, new HandValue(7, cards));
         }
 
         public bool IsHandThis(Hand hand)

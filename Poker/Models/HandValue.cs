@@ -45,6 +45,11 @@ namespace Poker.Models
             handRank = handRank | cardValue;
             cursor -= 4;
         }
+
+        public override string ToString()
+        {
+            return $"{Convert.ToString(handRank, 16)}";
+        }
         public int CompareTo(HandValue other)
         {
             if (other == null)

@@ -16,10 +16,10 @@ namespace Poker.HandEvaluators
             if (!IsHandThis(hand))
                 throw new HandIsNotThisTypeException("Hand is not a Pair and cannot be evaluated");
 
-            List<Card> cards = hand.cards.OrderByDescending(_ => _).GroupBy(_ => _.CardValue)
-                                         .Where(_ => _.Count() == 2).SelectMany(_ => _).Distinct<Card>(new CardValueEqualityComparer()).ToList();
-            cards.AddRange(hand.cards.OrderByDescending(_ => _).GroupBy(_ => _.CardValue)
-                                     .Where(_ => _.Count() == 1).SelectMany(_ => _).Distinct<Card>(new CardValueEqualityComparer()));
+            Card highCard = hand.cards.OrderByDescending(_ => _).GroupBy(_ => _.CardValue)
+                                         .Where(_ => _.Count() == 2).First().Distinct<Card>(new CardValueEqualityComparer()).First();
+            List<Card> cards = new List<Card>(new Card[] { highCard });
+            cards.AddRange(hand.cards.Where(_ => _.CardValue != highCard.CardValue).OrderByDescending(_ => _).Where((i,j) => i.CardValue != highCard.CardValue && j < 3));
 
             return new HandDetails(hand, new HandValue(1, cards));
         }

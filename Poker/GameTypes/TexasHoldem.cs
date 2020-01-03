@@ -1,15 +1,25 @@
-﻿using Poker.Models;
+﻿using Poker.HandEvaluators;
+using Poker.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Poker.Exceptions;
 
 namespace Poker.GameTypes
 {
     public class TexasHoldem : AbstractGameType
     {
         private Hand communityCards;
+        private int communityCardsSizeMax;
         public Hand CommunityCards { get; }
+
+        public TexasHoldem(): base(2)
+        {
+            communityCardsSizeMax = 5;
+            handEvaluator = new HandRanker<IPokerHandEvaluator>();
+            communityCards = new Hand();
+        }
 
         public override HandDetails FindWinningHand()
         {
@@ -22,6 +32,8 @@ namespace Poker.GameTypes
             {
                 communityCards.AddCard(card);
             }
+            if (communityCards.cards.Count() > communityCardsSizeMax)
+                throw new HandWrongSizeException("Community cards has too many cards in it");
         }
     }
 }

@@ -60,6 +60,17 @@ namespace Poker.Models
             return result;
         }
 
+        public override string ToString()
+        {
+            string result = "Hand: ";
+            foreach (Card card in cards)
+            {
+                result += card.ToString() + ", ";
+            }
+            result = result.Substring(0, result.Length - 2);
+
+            return result;
+        }
         public override bool Equals(object obj)
         {
             bool result = false;

@@ -54,8 +54,9 @@ namespace Poker.Tests.HandEvaluatorTests
             PairHandEvaluator evaluator = new PairHandEvaluator();
             //Assert.IsFalse(evaluator.IsHandThis(hand));
             Assert.AreEqual(evaluator.GetHandValue(hand).HandValue, new HandValue(1, new Card(4, CardSuit.Diamond),
+                                                                                     new Card(6, CardSuit.Diamond),
                                                                                      new Card(3, CardSuit.Diamond),
-                                                                                     new Card(6, CardSuit.Diamond)));
+                                                                                     new Card(3, CardSuit.Club)));
         }
 
         [TestCase]

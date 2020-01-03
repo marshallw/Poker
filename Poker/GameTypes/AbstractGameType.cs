@@ -10,10 +10,16 @@ namespace Poker.GameTypes
     public abstract class AbstractGameType
     {
         protected List<Hand> hands;
-        protected int maxHandSize = 5;
+        protected int maxHandSize;
         protected HandRanker<IPokerHandEvaluator> handEvaluator;
 
         public int MaxHandSize => maxHandSize;
+
+        public AbstractGameType(int maxHand)
+        {
+            maxHandSize = maxHand;
+            hands = new List<Hand>();
+        }
 
         public void AddHand(params Hand[] hands)
         {
