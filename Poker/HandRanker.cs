@@ -19,7 +19,7 @@ namespace Poker
         private void LoadEvaluators()
         {
             var evaluatorTypes = from type in this.GetType().Assembly.GetTypes()
-                       where typeof(T).IsAssignableFrom(type) && !type.IsInterface
+                       where typeof(T).IsAssignableFrom(type) && !type.IsInterface && !type.IsAbstract
                        select type;
 
             foreach (Type evaluatorType in evaluatorTypes)
@@ -29,10 +29,14 @@ namespace Poker
                     evaluators.Add(evaluator);
             }
         }
-        public HandDetails RankHand(params Hand[] hands)
+        public HandDetails RankHand(Hand hand)
         {
-            var collectiveCards = new Hand(hands.ToList().Select(_ => _.cards).SelectMany(_ => _).ToArray());
-            return  evaluators.Where(_ => _.IsHandThis(collectiveCards)).Select(_ => _.GetHandValue(collectiveCards)).OrderByDescending(_ => _).FirstOrDefault();
+            return  evaluators.Where(_ => _.IsHandThis(hand)).Select(_ => _.GetHandValue(hand)).OrderByDescending(_ => _).FirstOrDefault();
+        }
+
+        public HandDetails RankHand(Hand hand, Hand communityCards)
+        {
+            return evaluators.Where(_ => _.IsHandThis(hand, communityCards)).Select(_ => _.GetHandValue(hand, communityCards)).OrderByDescending(_ => _).FirstOrDefault();
         }
     }
 }

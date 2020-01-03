@@ -7,20 +7,20 @@ using System.Text;
 
 namespace Poker.HandEvaluators
 {
-    public class ThreeOfAKindEvaluator : IPokerHandEvaluator
+    public class ThreeOfAKindEvaluator : BasePokerHandEvaluator
     {
-        public HandDetails GetHandValue(Hand hand)
+        public override HandDetails GetHandValue(Hand hand)
         {
             if (!IsHandThis(hand))
                 throw new HandIsNotThisTypeException("Hand is not a Three of a Kind and cannot be evaluated");
 
-            var highCard = hand.cards.OrderByDescending(_ => _.CardValue).GroupBy(_ => _.CardValue).Where(_ => _.Count() == 3).First().First();
+            var highCard = hand.Cards.OrderByDescending(_ => _.CardValue).GroupBy(_ => _.CardValue).Where(_ => _.Count() == 3).First().First();
             var cards = new List<Card>(new Card[] { highCard });
-            cards.AddRange(hand.cards.Where(_ => _.CardValue != highCard.CardValue).OrderByDescending(_ => _.CardValue).Where((i, j) => i.CardValue != highCard.CardValue && j < 2));
+            cards.AddRange(hand.Cards.Where(_ => _.CardValue != highCard.CardValue).OrderByDescending(_ => _.CardValue).Where((i, j) => i.CardValue != highCard.CardValue && j < 2));
 
             return new HandDetails(hand, new HandValue(2, cards));
         }
 
-        public bool IsHandThis(Hand hand) => hand.cards.GroupBy(_ => _.CardValue).Where(_ => _.Count() == 3).Any();
+        public override bool IsHandThis(Hand hand) => hand.Cards.GroupBy(_ => _.CardValue).Where(_ => _.Count() == 3).Any();
     }
 }

@@ -8,21 +8,21 @@ using System.Text;
 
 namespace Poker.HandEvaluators
 {
-    public class StraightHandEvaluator : IPokerHandEvaluator
+    public class StraightHandEvaluator : BasePokerHandEvaluator
     {
-        public HandDetails GetHandValue(Hand hand)
+        public override HandDetails GetHandValue(Hand hand)
         {
             if (!IsHandThis(hand))
                 throw new HandIsNotThisTypeException("Hand is not a Straight and cannot be evaluated");
 
-            var highCard = hand.cards.OrderByDescending(_ => _.CardValue).Distinct<Card>(new CardValueEqualityComparer()).First();
+            var highCard = hand.Cards.OrderByDescending(_ => _.CardValue).Distinct<Card>(new CardValueEqualityComparer()).First();
 
             return new HandDetails(hand, new HandValue(4, highCard));
         }
 
-        public bool IsHandThis(Hand hand)
+        public override bool IsHandThis(Hand hand)
         {
-            var cardsTransformation = hand.cards.OrderBy(_ => _.CardValue).Select((i, j) => new Card(i.CardValue - j, i.CardSuit));
+            var cardsTransformation = hand.Cards.OrderBy(_ => _.CardValue).Select((i, j) => new Card(i.CardValue - j, i.CardSuit));
             return cardsTransformation.Where(_ => _.CardValue == cardsTransformation.First().CardValue).Count() == 5 && cardsTransformation.Distinct<Card>(new CardValueEqualityComparer()).Count() == 1;
         }
     }

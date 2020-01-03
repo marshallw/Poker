@@ -7,24 +7,24 @@ using System.Text;
 
 namespace Poker.HandEvaluators
 {
-    public class FourOfAKindEvaluator : IPokerHandEvaluator
+    public class FourOfAKindEvaluator : BasePokerHandEvaluator
     {
-        public HandDetails GetHandValue(Hand hand)
+        public override HandDetails GetHandValue(Hand hand)
         {
             if (!IsHandThis(hand))
                 throw new HandIsNotThisTypeException("Hand is not a Four of a Kind and cannot be evaluated");
 
-            var highCard = hand.cards.OrderByDescending(_ => _.CardValue).GroupBy(_ => _.CardValue)
+            var highCard = hand.Cards.OrderByDescending(_ => _.CardValue).GroupBy(_ => _.CardValue)
                                      .Where(_ => _.Count() == 4).First().First();
             var cards = new List<Card>(new Card[]{ highCard });
-            cards.Add(hand.cards.Where(_ => _.CardValue != highCard.CardValue).OrderByDescending(_ => _.CardValue).First());
+            cards.Add(hand.Cards.Where(_ => _.CardValue != highCard.CardValue).OrderByDescending(_ => _.CardValue).First());
 
             return new HandDetails(hand, new HandValue(7, cards));
         }
 
-        public bool IsHandThis(Hand hand)
+        public override bool IsHandThis(Hand hand)
         {
-            return hand.cards.GroupBy(_ => _.CardValue).Where(_ => _.Count() == 4).Any();
+            return hand.Cards.GroupBy(_ => _.CardValue).Where(_ => _.Count() == 4).Any();
         }
     }
 }

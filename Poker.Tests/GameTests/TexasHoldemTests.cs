@@ -11,7 +11,7 @@ namespace Poker.Tests.GameTests
     class TexasHoldemTests
     {
         [TestCase]
-        public void Poker_Challenge1_TestCase1()
+        public void TexasHoldem_Challenge2_TestCase1()
         {
             TexasHoldem game = new TexasHoldem();
 
@@ -32,7 +32,7 @@ namespace Poker.Tests.GameTests
                                         new Card(CardValue.Nine, CardSuit.Diamond),
                                         new Card(CardValue.Two, CardSuit.Diamond));
 
-            Assert.AreEqual(game.FindWinningHand().hand, joe);
+            Assert.AreEqual(game.FindWinningHand().Hand, joe);
         }
     }
 }

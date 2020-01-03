@@ -7,22 +7,22 @@ using System.Text;
 
 namespace Poker.HandEvaluators
 {
-    public class FlushHandEvaluator : IPokerHandEvaluator
+    public class FlushHandEvaluator : BasePokerHandEvaluator
     {
-        public HandDetails GetHandValue(Hand hand)
+        public override HandDetails GetHandValue(Hand hand)
         {
             if (!IsHandThis(hand))
                 throw new HandIsNotThisTypeException("Hand is not a Flush and cannot be evaluated");
 
-            var cards = hand.cards.GroupBy(_ => _.CardSuit).Where(_ => _.Count() >= 5).SelectMany(_ => _)
+            var cards = hand.Cards.GroupBy(_ => _.CardSuit).Where(_ => _.Count() >= 5).SelectMany(_ => _)
                                   .OrderByDescending(_ => _.CardValue).Where((i, j) => j <= 4).ToList();
 
             return new HandDetails(hand, new HandValue(5, cards));
         }
 
-        public bool IsHandThis(Hand hand)
+        public override bool IsHandThis(Hand hand)
         {
-            return hand.cards.GroupBy(_ => _.CardSuit).Where(_ => _.Count() >= 5).Any();
+            return hand.Cards.GroupBy(_ => _.CardSuit).Where(_ => _.Count() >= 5).Any();
         }
     }
 }

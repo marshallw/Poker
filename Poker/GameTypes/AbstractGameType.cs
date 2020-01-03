@@ -25,9 +25,9 @@ namespace Poker.GameTypes
         {
             foreach (var hand in hands)
             {
-                if (hand.cards.Count != maxHandSize)
+                if (hand.Cards.Count != maxHandSize)
                 {
-                    throw new HandWrongSizeException($"Hand is too large.  Max: {maxHandSize}.  Actual: {hand.cards.Count}");
+                    throw new HandWrongSizeException($"Hand is too large.  Max: {maxHandSize}.  Actual: {hand.Cards.Count}");
                 }
 
                 this.hands.Add(hand);

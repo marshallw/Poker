@@ -7,14 +7,14 @@ using Poker.Exceptions;
 
 namespace Poker.HandEvaluators
 {
-    public class HighCardEvaluator : IPokerHandEvaluator
+    public class HighCardEvaluator : BasePokerHandEvaluator
     {
-        public bool IsHandThis(Hand hand)
+        public override bool IsHandThis(Hand hand)
         {
             return hand.cards.OrderByDescending(x => x.CardValue).FirstOrDefault() != null;
         }
 
-        public HandDetails GetHandValue(Hand hand)
+        public override HandDetails GetHandValue(Hand hand)
         {
             if (!IsHandThis(hand))
                 throw new HandIsNotThisTypeException("Card has no high cards; are there even any cards?");

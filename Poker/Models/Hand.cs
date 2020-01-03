@@ -7,7 +7,8 @@ namespace Poker.Models
 {
     public class Hand
     {
-        public List<Card> cards;
+        public List<Card> Cards => cards;
+        private List<Card> cards;
 
         public Hand(params Card[] newCards)
         {
@@ -17,6 +18,11 @@ namespace Poker.Models
         public Hand()
         {
             cards = new List<Card>();
+        }
+
+        public Hand(List<Card> newCards)
+        {
+            cards = newCards;
         }
 
         public void AddCard(Card card)
