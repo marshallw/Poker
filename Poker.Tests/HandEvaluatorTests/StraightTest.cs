@@ -99,5 +99,35 @@ namespace Poker.Tests.HandEvaluatorTests
 
             Assert.AreEqual(evaluator.GetHandValue(hand).HandValue, new HandValue(4, new Card(6, CardSuit.Spade)));
         }
+
+        [TestCase]
+        public void Straight_AcesLow_IsValid()
+        {
+            Hand hand = new Hand();
+            hand.AddCard(new Card(2, CardSuit.Club));
+            hand.AddCard(new Card(3, CardSuit.Diamond));
+            hand.AddCard(new Card(4, CardSuit.Diamond));
+            hand.AddCard(new Card(5, CardSuit.Spade));
+            hand.AddCard(new Card(1, CardSuit.Club));
+
+            IPokerHandEvaluator evaluator = new StraightHandEvaluator();
+
+            Assert.IsTrue(evaluator.IsHandThis(hand));
+        }
+
+        [TestCase]
+        public void Straight_AcesLow()
+        {
+            Hand hand = new Hand();
+            hand.AddCard(new Card(2, CardSuit.Club));
+            hand.AddCard(new Card(3, CardSuit.Diamond));
+            hand.AddCard(new Card(4, CardSuit.Diamond));
+            hand.AddCard(new Card(5, CardSuit.Spade));
+            hand.AddCard(new Card(1, CardSuit.Club));
+
+            IPokerHandEvaluator evaluator = new StraightHandEvaluator();
+
+            Assert.AreEqual(evaluator.GetHandValue(hand).HandValue, new HandValue(4, new Card(CardValue.Five, CardSuit.Club)));
+        }
     }
 }
