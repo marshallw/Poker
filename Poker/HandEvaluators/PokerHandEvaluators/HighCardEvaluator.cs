@@ -11,7 +11,7 @@ namespace Poker.HandEvaluators
     {
         public override bool IsHandThis(Hand hand)
         {
-            return hand.cards.OrderByDescending(x => x.CardValue).FirstOrDefault() != null;
+            return hand.Cards.OrderByDescending(x => x.CardValue).FirstOrDefault() != null;
         }
 
         public override HandDetails GetHandValue(Hand hand)
@@ -19,7 +19,7 @@ namespace Poker.HandEvaluators
             if (!IsHandThis(hand))
                 throw new HandIsNotThisTypeException("Card has no high cards; are there even any cards?");
 
-            var cardsInOrder = hand.cards.OrderByDescending(_ => _).Where((i, j) => j <= 4);
+            var cardsInOrder = hand.Cards.OrderByDescending(_ => _).Where((i, j) => j <= 4);
 
             return HandDetails.Create(hand, new HandValue(0, cardsInOrder));
         }

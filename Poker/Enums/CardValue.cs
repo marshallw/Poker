@@ -7,6 +7,7 @@ namespace Poker.Enums
 {
     public enum CardValue
     {
+        AceLow = 1,
         Two = 2,
         Three = 3,
         Four = 4,

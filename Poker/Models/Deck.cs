@@ -9,17 +9,17 @@ namespace Poker.Models
     {
         private const int MAX_CARDS = 52;
         private int top = 0;
-        private Card[] _cards;
+        private Card[] cards;
 
         public int Count => top;
 
         public Deck()
         {
-            _cards = new Card[MAX_CARDS];
+            cards = new Card[MAX_CARDS];
         }
         public IEnumerator<Card> GetEnumerator()
         {
-            return new DeckEnum<Card>(_cards, top);
+            return new DeckEnum<Card>(cards, top);
         }
 
         public void Randomize()
@@ -27,12 +27,12 @@ namespace Poker.Models
             
             Random random = new Random();
         
-            for(int i = 0; i < _cards.Length; i++)
+            for(int i = 0; i < cards.Length; i++)
             {
                 int swap = random.Next(i + 1);
-                Card temp = _cards[i];
-                _cards[i] = _cards[swap];
-                _cards[swap] = temp;
+                Card temp = cards[i];
+                cards[i] = cards[swap];
+                cards[swap] = temp;
             }
         }
 
@@ -40,7 +40,7 @@ namespace Poker.Models
         {
             if (top < MAX_CARDS)
             {
-                _cards[top++] = card;
+                cards[top++] = card;
             }
             else
             {
@@ -52,7 +52,7 @@ namespace Poker.Models
         {
             if (top > 0)
             {
-                return _cards[--top];
+                return cards[--top];
             }
             else
             {

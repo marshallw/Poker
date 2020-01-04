@@ -32,7 +32,7 @@ namespace Poker.GameTypes
             {
                 communityCards.AddCard(card);
             }
-            if (communityCards.cards.Count() > communityCardsSizeMax)
+            if (communityCards.Cards.Count() > communityCardsSizeMax)
                 throw new HandWrongSizeException("Community cards has too many cards in it");
         }
     }

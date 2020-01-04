@@ -45,7 +45,7 @@ namespace Poker.Tests.HandEvaluatorTests
 
             IPokerHandEvaluator evaluator = new HighCardEvaluator();
 
-            Assert.IsTrue(evaluator.GetHandValue(hand).HandValue == new HandValue(0, hand.cards.OrderByDescending(_ => _.CardValue)));
+            Assert.IsTrue(evaluator.GetHandValue(hand).HandValue == new HandValue(0, hand.Cards.OrderByDescending(_ => _.CardValue)));
 
         }
     }
