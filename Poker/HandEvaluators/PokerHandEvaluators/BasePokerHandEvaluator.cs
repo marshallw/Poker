@@ -8,14 +8,14 @@ namespace Poker.HandEvaluators
 {
     public abstract class BasePokerHandEvaluator : IPokerHandEvaluator
     {
-        public abstract HandDetails GetHandValue(Hand hand);
+        public abstract HandDetails GetHandRank(Hand hand);
 
-        public HandDetails GetHandValue(Hand hand, Hand communityCards)
+        public HandDetails GetHandRank(Hand hand, Hand communityCards)
         {
             var cards = hand.Cards.ToList();
             cards.AddRange(communityCards.Cards);
             var collectiveCards = new Hand(cards);
-            var details = GetHandValue(collectiveCards);
+            var details = GetHandRank(collectiveCards);
             return new HandDetails(hand, details.HandValue);
         }
 

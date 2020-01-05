@@ -18,7 +18,7 @@ namespace Poker.Tests.HandEvaluatorTests
         }
 
         [TestCase]
-        public void HighCard_IsThisHighCard()
+        public void HighCard_FiveCardsTenHigh_IsValid()
         {
             Hand hand = new Hand();
             hand.AddCard(new Card(2, CardSuit.Club));
@@ -34,7 +34,7 @@ namespace Poker.Tests.HandEvaluatorTests
         }
 
         [TestCase]
-        public void HighCard_CanCreateHandValue()
+        public void HighCard_FiveCards_CreateProperRanking()
         {
             Hand hand = new Hand();
             hand.AddCard(new Card(2, CardSuit.Club));
@@ -45,8 +45,42 @@ namespace Poker.Tests.HandEvaluatorTests
 
             IPokerHandEvaluator evaluator = new HighCardEvaluator();
 
-            Assert.IsTrue(evaluator.GetHandValue(hand).HandValue == new HandValue(0, hand.Cards.OrderByDescending(_ => _.CardValue)));
+            Assert.AreEqual(evaluator.GetHandRank(hand).HandValue, new HandValue(0, hand.Cards.OrderByDescending(_ => _.CardValue)));
 
+        }
+
+        [TestCase]
+        public void HighCard_SevenCardStud_IsValid()
+        {
+            Hand hand = new Hand();
+            hand.AddCard(new Card(2, CardSuit.Club));
+            hand.AddCard(new Card(10, CardSuit.Diamond));
+            hand.AddCard(new Card(10, CardSuit.Club));
+            hand.AddCard(new Card(14, CardSuit.Spade));
+            hand.AddCard(new Card(14, CardSuit.Diamond));
+            hand.AddCard(new Card(5, CardSuit.Heart));
+            hand.AddCard(new Card(7, CardSuit.Spade));
+
+            HighCardEvaluator evaluator = new HighCardEvaluator();
+
+            Assert.IsTrue(evaluator.IsHandThis(hand));
+        }
+
+        [TestCase]
+        public void HighCard_SevenCardStud_CreatesProperRanking()
+        {
+            Hand hand = new Hand();
+            hand.AddCard(new Card(2, CardSuit.Club));
+            hand.AddCard(new Card(10, CardSuit.Diamond));
+            hand.AddCard(new Card(10, CardSuit.Club));
+            hand.AddCard(new Card(14, CardSuit.Spade));
+            hand.AddCard(new Card(14, CardSuit.Diamond));
+            hand.AddCard(new Card(5, CardSuit.Heart));
+            hand.AddCard(new Card(7, CardSuit.Spade));
+
+            HighCardEvaluator evaluator = new HighCardEvaluator();
+
+            Assert.AreEqual(evaluator.GetHandRank(hand).HandValue, new HandValue(0, hand.Cards.OrderByDescending(_ => _.CardValue).Where((i,j) => j <= 4)));
         }
     }
 }

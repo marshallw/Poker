@@ -10,13 +10,13 @@ namespace Poker.HandEvaluators
 {
     public class FullHouseEvaluator : BasePokerHandEvaluator
     {
-        public override HandDetails GetHandValue(Hand hand)
+        public override HandDetails GetHandRank(Hand hand)
         {
             if (!IsHandThis(hand))
                 throw new HandIsNotThisTypeException("Hand is not a Full House and cannot be evaluated");
 
             var highCard = hand.Cards.GroupBy(_ => _.CardValue).OrderByDescending(_ => _.Count())
-                                    .Where(_ => _.Count() == 3).First().First();
+                                    .Where(_ => _.Count() >= 3).First().First();
             var cards = new List<Card>(new Card[] { highCard });
             cards.Add(hand.Cards.Where(_ => _.CardValue != highCard.CardValue).GroupBy(_ => _.CardValue)
                                 .Where(_ => _.Count() >= 2).SelectMany(_ => _).OrderByDescending(_ => _.CardValue).First());
@@ -25,8 +25,9 @@ namespace Poker.HandEvaluators
 
         public override bool IsHandThis(Hand hand)
         {
-            return hand.Cards.GroupBy(_ => _.CardValue).Any(_ => _.Count() == 2) && 
-                   hand.Cards.GroupBy(_ => _.CardValue).Any(_ => _.Count() == 3);
+            return hand.Cards.GroupBy(_ => _.CardValue).Where(_ => _.Count() >= 3).Count() >= 2 ||
+                (hand.Cards.GroupBy(_ => _.CardValue).Any(_ => _.Count() == 2) &&
+                hand.Cards.GroupBy(_ => _.CardValue).Any(_ => _.Count() >= 3));
         }
     }
 }

@@ -9,7 +9,7 @@ namespace Poker.HandEvaluators
 {
     public class FourOfAKindEvaluator : BasePokerHandEvaluator
     {
-        public override HandDetails GetHandValue(Hand hand)
+        public override HandDetails GetHandRank(Hand hand)
         {
             if (!IsHandThis(hand))
                 throw new HandIsNotThisTypeException("Hand is not a Four of a Kind and cannot be evaluated");

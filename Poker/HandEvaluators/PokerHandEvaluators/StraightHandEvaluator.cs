@@ -11,13 +11,13 @@ namespace Poker.HandEvaluators
 {
     public class StraightHandEvaluator : BasePokerHandEvaluator
     {
-        public override HandDetails GetHandValue(Hand hand)
+        public override HandDetails GetHandRank(Hand hand)
         {
             if (!IsHandThis(hand))
                 throw new HandIsNotThisTypeException("Hand is not a Straight and cannot be evaluated");
 
-            List<Card> cards = hand.Cards;
-            cards.AddRange(cards.Where(_ => _.CardValue == CardValue.Ace).Select(_ => new Card(CardValue.AceLow, _.CardSuit)));
+            List<Card> cards = hand.Cards.ToList();
+            cards.AddRange(hand.Cards.Where(_ => _.CardValue == CardValue.Ace).Select(_ => new Card(CardValue.AceLow, _.CardSuit)));
             cards = cards.OrderBy(_ => _.CardValue).ToList();
 
             cards = cards.Distinct(new CardValueEqualityComparer()).Aggregate(new List<Card>(), (cards, next) =>
@@ -42,7 +42,7 @@ namespace Poker.HandEvaluators
             var cardsTransform = hand.Cards;
             cardsTransform.AddRange(cardsTransform.Where(_ => _.CardValue == CardValue.Ace).Select(_ => new Card(CardValue.AceLow, _.CardSuit)).ToList());
             cardsTransform = cardsTransform.OrderBy(_ => _.CardValue).Select((i, j) => new Card(i.CardValue - j, i.CardSuit)).ToList();
-            bool result = cardsTransform.Where(_ => _.CardValue == cardsTransform.First().CardValue).Count() >= 5 && cardsTransform.Distinct<Card>(new CardValueEqualityComparer()).Count() == 1;
+            bool result = cardsTransform.GroupBy(_ => _.CardValue).Where(_ => _.Count() >= 5).Any();
 
             return result;
         }

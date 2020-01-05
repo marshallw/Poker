@@ -10,7 +10,7 @@ namespace Poker.HandEvaluators
     {
         bool IsHandThis(Hand hand);
         bool IsHandThis(Hand hand, Hand communityCards);
-        HandDetails GetHandValue(Hand hand);
-        HandDetails GetHandValue(Hand hand, Hand communityCards);
+        HandDetails GetHandRank(Hand hand);
+        HandDetails GetHandRank(Hand hand, Hand communityCards);
     }
 }

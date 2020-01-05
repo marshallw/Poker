@@ -11,7 +11,7 @@ namespace Poker.HandEvaluators
 {
     public class PairHandEvaluator : BasePokerHandEvaluator
     {
-        public override HandDetails GetHandValue(Hand hand)
+        public override HandDetails GetHandRank(Hand hand)
         {
             if (!IsHandThis(hand))
                 throw new HandIsNotThisTypeException("Hand is not a Pair and cannot be evaluated");

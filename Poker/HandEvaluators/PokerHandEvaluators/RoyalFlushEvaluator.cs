@@ -9,7 +9,7 @@ namespace Poker.HandEvaluators.PokerHandEvaluators
 {
     public class RoyalFlushEvaluator : BasePokerHandEvaluator
     {
-        public override HandDetails GetHandValue(Hand hand)
+        public override HandDetails GetHandRank(Hand hand)
         {
             if (!IsHandThis(hand))
                 throw new HandIsNotThisTypeException("This hand is not a royal flush and cannot be evaluated.");

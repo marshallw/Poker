@@ -82,7 +82,7 @@ namespace Poker.Tests.HandEvaluatorTests
 
             IPokerHandEvaluator evaluator = new StraightHandEvaluator();
 
-            Assert.AreEqual(evaluator.GetHandValue(hand).HandValue, new HandValue(4, new Card(7, CardSuit.Spade)));
+            Assert.AreEqual(evaluator.GetHandRank(hand).HandValue, new HandValue(4, new Card(7, CardSuit.Spade)));
         }
 
         [TestCase]
@@ -97,7 +97,7 @@ namespace Poker.Tests.HandEvaluatorTests
 
             IPokerHandEvaluator evaluator = new StraightHandEvaluator();
 
-            Assert.AreEqual(evaluator.GetHandValue(hand).HandValue, new HandValue(4, new Card(6, CardSuit.Spade)));
+            Assert.AreEqual(evaluator.GetHandRank(hand).HandValue, new HandValue(4, new Card(6, CardSuit.Spade)));
         }
 
         [TestCase]
@@ -127,7 +127,90 @@ namespace Poker.Tests.HandEvaluatorTests
 
             IPokerHandEvaluator evaluator = new StraightHandEvaluator();
 
-            Assert.AreEqual(evaluator.GetHandValue(hand).HandValue, new HandValue(4, new Card(CardValue.Five, CardSuit.Club)));
+            Assert.AreEqual(evaluator.GetHandRank(hand).HandValue, new HandValue(4, new Card(CardValue.Five, CardSuit.Club)));
+        }
+
+        [TestCase]
+        public void Straight_AcesLow_IsValid2()
+        {
+            Hand hand = new Hand();
+            hand.AddCard(new Card(2, CardSuit.Club));
+            hand.AddCard(new Card(3, CardSuit.Diamond));
+            hand.AddCard(new Card(4, CardSuit.Diamond));
+            hand.AddCard(new Card(5, CardSuit.Spade));
+            hand.AddCard(new Card(14, CardSuit.Club));
+
+            IPokerHandEvaluator evaluator = new StraightHandEvaluator();
+
+            Assert.IsTrue(evaluator.IsHandThis(hand));
+        }
+
+        [TestCase]
+        public void Straight_SevenCardStudAcesLow_IsValid()
+        {
+            Hand hand = new Hand();
+            hand.AddCard(new Card(2, CardSuit.Club));
+            hand.AddCard(new Card(3, CardSuit.Diamond));
+            hand.AddCard(new Card(4, CardSuit.Diamond));
+            hand.AddCard(new Card(5, CardSuit.Spade));
+            hand.AddCard(new Card(14, CardSuit.Club));
+            hand.AddCard(new Card(13, CardSuit.Club));
+            hand.AddCard(new Card(12, CardSuit.Club));
+
+            IPokerHandEvaluator evaluator = new StraightHandEvaluator();
+
+            Assert.IsTrue(evaluator.IsHandThis(hand));
+        }
+
+        [TestCase]
+        public void Straight_SevenCardStudAcesLow_CreatesProperRanking()
+        {
+            Hand hand = new Hand();
+            hand.AddCard(new Card(2, CardSuit.Club));
+            hand.AddCard(new Card(3, CardSuit.Diamond));
+            hand.AddCard(new Card(4, CardSuit.Diamond));
+            hand.AddCard(new Card(5, CardSuit.Spade));
+            hand.AddCard(new Card(14, CardSuit.Club));
+            hand.AddCard(new Card(13, CardSuit.Club));
+            hand.AddCard(new Card(12, CardSuit.Club));
+
+            IPokerHandEvaluator evaluator = new StraightHandEvaluator();
+
+            Assert.AreEqual(evaluator.GetHandRank(hand).HandValue, new HandValue(4, new Card(CardValue.Five, CardSuit.Club)));
+        }
+
+        [TestCase]
+        public void Straight_SevenCardStudAcesLow_CreatesProperRanking2()
+        {
+            Hand hand = new Hand();
+            hand.AddCard(new Card(2, CardSuit.Club));
+            hand.AddCard(new Card(3, CardSuit.Diamond));
+            hand.AddCard(new Card(4, CardSuit.Diamond));
+            hand.AddCard(new Card(5, CardSuit.Spade));
+            hand.AddCard(new Card(14, CardSuit.Club));
+            hand.AddCard(new Card(13, CardSuit.Club));
+            hand.AddCard(new Card(12, CardSuit.Club));
+
+            IPokerHandEvaluator evaluator = new StraightHandEvaluator();
+
+            Assert.AreEqual(evaluator.GetHandRank(hand).HandValue, new HandValue(4, new Card(CardValue.Five, CardSuit.Club)));
+        }
+
+        [TestCase]
+        public void Straight_SevenCardStud_IsNotValid()
+        {
+            Hand hand = new Hand();
+            hand.AddCard(new Card(2, CardSuit.Club));
+            hand.AddCard(new Card(3, CardSuit.Diamond));
+            hand.AddCard(new Card(7, CardSuit.Diamond));
+            hand.AddCard(new Card(5, CardSuit.Spade));
+            hand.AddCard(new Card(14, CardSuit.Club));
+            hand.AddCard(new Card(13, CardSuit.Club));
+            hand.AddCard(new Card(12, CardSuit.Club));
+
+            IPokerHandEvaluator evaluator = new StraightHandEvaluator();
+
+            Assert.IsFalse(evaluator.IsHandThis(hand));
         }
     }
 }

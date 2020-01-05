@@ -14,7 +14,7 @@ namespace Poker.HandEvaluators
             return hand.Cards.OrderByDescending(x => x.CardValue).FirstOrDefault() != null;
         }
 
-        public override HandDetails GetHandValue(Hand hand)
+        public override HandDetails GetHandRank(Hand hand)
         {
             if (!IsHandThis(hand))
                 throw new HandIsNotThisTypeException("Card has no high cards; are there even any cards?");
