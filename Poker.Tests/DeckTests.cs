@@ -46,5 +46,15 @@ namespace Tests
 
             Assert.IsTrue(card.CardSuitName == "Heart" && card.CardValue == CardValue.Ten);
         }
+
+        [TestCase]
+        public void CanInitializeDeck()
+        {
+            Deck deck = new Deck();
+
+            deck = Deck.GenerateDeck();
+
+            Assert.AreEqual(deck.Count, 52);
+        }
     }
 }

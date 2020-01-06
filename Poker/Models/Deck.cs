@@ -2,6 +2,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Text;
+using Poker.Enums;
+using System.Linq;
 
 namespace Poker.Models
 {
@@ -36,6 +38,23 @@ namespace Poker.Models
             }
         }
 
+        public static Deck GenerateDeck()
+        {
+            Deck deck = new Deck();
+            var suits = Enum.GetValues(typeof(CardSuit)).Cast<CardSuit>();
+            var cardValues = Enum.GetValues(typeof(CardValue)).Cast<CardValue>().ToList();
+            cardValues.Remove(CardValue.AceLow);
+            foreach (var suit in suits)
+            {
+                foreach (var cardValue in cardValues)
+                {
+                    deck.Push(new Card(cardValue, suit));
+                }
+            }
+
+            return deck;
+        }
+
         public void Push(Card card)
         {
             if (top < MAX_CARDS)
@@ -44,7 +63,7 @@ namespace Poker.Models
             }
             else
             {
-                throw new Exception("There ain't more than 52 cares in a deck fool");
+                throw new Exception("This is a 52 card deck, not a 53 card deck");
             }
         }
 
@@ -56,7 +75,7 @@ namespace Poker.Models
             }
             else
             {
-                throw new Exception("Nothing left ta pop!");
+                throw new Exception("Nothing left to pop!");
             }
         }
 
