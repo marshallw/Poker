@@ -23,7 +23,10 @@ namespace Poker.GameTypes
 
         public override HandDetails FindWinningHand()
         {
-            return hands.Select(_ => handEvaluator.RankHand(_, communityCards)).OrderByDescending(_ => _).First();
+            return hands.Select(_ => handEvaluator
+                        .RankHand(_, communityCards))
+                        .OrderByDescending(_ => _)
+                        .First();
         }
 
         public void AddCardToCommunityHand(params Card[] cards)
@@ -32,6 +35,7 @@ namespace Poker.GameTypes
             {
                 communityCards.AddCard(card);
             }
+
             if (communityCards.Cards.Count() > communityCardsSizeMax)
                 throw new HandWrongSizeException("Community cards has too many cards in it");
         }

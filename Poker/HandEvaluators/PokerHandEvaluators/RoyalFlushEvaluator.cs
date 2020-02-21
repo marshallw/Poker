@@ -19,7 +19,11 @@ namespace Poker.HandEvaluators.PokerHandEvaluators
 
         public override bool IsHandThis(Hand hand)
         {
-            return hand.Cards.GroupBy(_ => _.CardSuit).Where(_ => _.Count() >= 5).SelectMany(_ => _).Where(_ => _.CardValue >= Enums.CardValue.Ten).Count() == 5;
+            return hand.Cards.GroupBy(_ => _.CardSuit)
+                             .Where(_ => _.Count() >= 5)
+                             .SelectMany(_ => _)
+                             .Where(_ => _.CardValue >= Enums.CardValue.Ten)
+                             .Count() == 5;
         }
     }
 }

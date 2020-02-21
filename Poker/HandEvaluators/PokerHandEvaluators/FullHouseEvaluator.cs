@@ -25,9 +25,13 @@ namespace Poker.HandEvaluators
 
         public override bool IsHandThis(Hand hand)
         {
-            return hand.Cards.GroupBy(_ => _.CardValue).Where(_ => _.Count() >= 3).Count() >= 2 ||
-                (hand.Cards.GroupBy(_ => _.CardValue).Any(_ => _.Count() == 2) &&
-                hand.Cards.GroupBy(_ => _.CardValue).Any(_ => _.Count() >= 3));
+            return hand.Cards.GroupBy(_ => _.CardValue)
+                             .Where(_ => _.Count() >= 3)
+                             .Count() >= 2 
+                   || (hand.Cards.GroupBy(_ => _.CardValue)
+                                 .Any(_ => _.Count() == 2) 
+                   && hand.Cards.GroupBy(_ => _.CardValue)
+                                .Any(_ => _.Count() >= 3));
         }
     }
 }

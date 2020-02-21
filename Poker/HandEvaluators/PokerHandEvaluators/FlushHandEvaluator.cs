@@ -14,15 +14,21 @@ namespace Poker.HandEvaluators
             if (!IsHandThis(hand))
                 throw new HandIsNotThisTypeException("Hand is not a Flush and cannot be evaluated");
 
-            var cards = hand.Cards.GroupBy(_ => _.CardSuit).Where(_ => _.Count() >= 5).SelectMany(_ => _)
-                                  .OrderByDescending(_ => _.CardValue).Where((i, j) => j <= 4).ToList();
+            var cards = hand.Cards.GroupBy(_ => _.CardSuit)
+                                  .Where(_ => _.Count() >= 5)
+                                  .SelectMany(_ => _)
+                                  .OrderByDescending(_ => _.CardValue)
+                                  .Where((i, j) => j <= 4)
+                                  .ToList();
 
             return new HandDetails(hand, new HandValue(5, cards));
         }
 
         public override bool IsHandThis(Hand hand)
         {
-            return hand.Cards.GroupBy(_ => _.CardSuit).Where(_ => _.Count() >= 5).Any();
+            return hand.Cards.GroupBy(_ => _.CardSuit)
+                             .Where(_ => _.Count() >= 5)
+                             .Any();
         }
     }
 }

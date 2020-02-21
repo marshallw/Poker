@@ -16,7 +16,9 @@ namespace Poker.GameTypes
 
         public override HandDetails FindWinningHand()
         {
-            return hands.Select(_ => handEvaluator.RankHand(_)).OrderByDescending(_ => _).First();
+            return hands.Select(_ => handEvaluator.RankHand(_))
+                        .OrderByDescending(_ => _)
+                        .First();
         }
     }
 }

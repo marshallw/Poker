@@ -10,8 +10,8 @@ namespace Poker.Models
         private CardSuit cardSuit;
         private CardValue cardValue;
 
-        public CardValue CardValue => cardValue;
-        public CardSuit CardSuit => cardSuit;
+        public CardValue CardValue { get => cardValue; }
+        public CardSuit CardSuit { get => cardSuit; }
 
         public string CardSuitName
         {

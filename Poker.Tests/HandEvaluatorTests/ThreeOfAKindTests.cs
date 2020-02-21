@@ -62,8 +62,8 @@ namespace Poker.Tests.HandEvaluatorTests
             hand.AddCard(new Card(4, CardSuit.Club));
             hand.AddCard(new Card(6, CardSuit.Diamond));
             hand.AddCard(new Card(4, CardSuit.Diamond));
-            hand.AddCard(new Card(4, CardSuit.Spade));
-            hand.AddCard(new Card(4, CardSuit.Heart));
+            hand.AddCard(new Card(3, CardSuit.Spade));
+            hand.AddCard(new Card(6, CardSuit.Heart));
 
             ThreeOfAKindEvaluator evaluator = new ThreeOfAKindEvaluator();
 

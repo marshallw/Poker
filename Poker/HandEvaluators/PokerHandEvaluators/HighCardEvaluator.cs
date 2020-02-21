@@ -19,7 +19,8 @@ namespace Poker.HandEvaluators
             if (!IsHandThis(hand))
                 throw new HandIsNotThisTypeException("Card has no high cards; are there even any cards?");
 
-            var cardsInOrder = hand.Cards.OrderByDescending(_ => _).Where((i, j) => j <= 4);
+            var cardsInOrder = hand.Cards.OrderByDescending(_ => _)
+                                         .Where((i, j) => j <= 4);
 
             return HandDetails.Create(hand, new HandValue(0, cardsInOrder));
         }
